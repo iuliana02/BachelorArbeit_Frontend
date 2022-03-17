@@ -1,0 +1,10 @@
+.profileBtn{
+  position: absolute;
+  left: 25px;
+  width: 40px;
+}
+.addProperty{
+  position: absolute;
+  left: 600px;
+  width: fit-content;
+}

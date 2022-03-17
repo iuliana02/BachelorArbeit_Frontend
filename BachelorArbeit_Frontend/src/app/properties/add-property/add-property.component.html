@@ -1,0 +1,125 @@
+<p-toast position="top-right"></p-toast>
+
+<div id="property-form">
+  <p-panel>
+    <ng-template pTemplate="header">
+      <h4>Register a new property</h4>
+    </ng-template>
+    <ng-template pTemplate="content">
+      <form [formGroup]="newPropertyForm" id="propertyForm" class="ui-fluid p-formgrid p-grid" *ngIf="this.newPropertyForm">
+      <h4> Address information</h4>
+      <div class="row">
+        <div class="col">
+        <div class="p-field p-col-12 p-md-2">
+        <span class="ui-float-label">
+          <label for="float-input" >Land</label> <br>
+          <input pInputText type="text" id="float-input" formControlName="land" name="property" size = "30" [class]= "this.emptyLand ? 'ng-invalid ng-dirty' : null">
+        </span>
+        </div>
+        </div>
+        <div class="col">
+        <div class="p-field p-col-12 p-md-2">
+          <label for="city">City</label><br>
+          <input pInputText type="text" id="city" formControlName="city" name="property" size = "30" [class]= "this.emptyCity ? 'ng-invalid ng-dirty' : null">
+        </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+        <div class="p-field p-col-12 p-md-2">
+          <label for="street">Street</label> <br>
+          <input pInputText type="email" id="street" formControlName="street" name="property" size = "30" [class]= "this.emptyStreet ? 'ng-invalid ng-dirty' : null">
+        </div>
+        </div>
+        <div class="col">
+        <div class="p-field p-col-12 p-md-2">
+          <label for="nr">Number</label><br>
+          <input pInputText type="number" id="nr" formControlName="nr" name="property" size = "30" [class]= "this.emptyNumber ? 'ng-invalid ng-dirty' : null">
+        </div>
+        </div>
+      </div>
+
+      <div class="p-field p-col-12 p-md-2">
+        <label for="description">Description</label><br>
+        <textarea pInputText id="description" formControlName="description" name="property" rows="3" style="resize: none;" cols="40" [class]= "this.emptydescription ? 'ng-invalid ng-dirty' : null"></textarea>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="p-field p-col-12 p-md-2">
+          <label for="divisionType">Division type</label><br>
+          <input pInputText type="text" id="divisionType" formControlName="divisionType" name="property" size = "30" [class]= "this.emptydivType ? 'ng-invalid ng-dirty' : null">
+        </div>
+        </div>
+        <div class="col">
+        <div class="p-field p-col-12 p-md-2">
+          <label for="area">Area</label><br>
+          <input pInputText type="text" id="area" formControlName="area" name="property" size = "30" [class]= "this.emptyArea ? 'ng-invalid ng-dirty' : null">
+        </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+        <div class="p-field p-col-12 p-md-2">
+          <label for="nrOfRooms">Number of rooms</label><br>
+          <input pInputText type="number" id="nrOfRooms" formControlName="nrOfRooms" name="property" size = "40" [class]= "this.emptyNrRooms ? 'ng-invalid ng-dirty' : null">
+        </div>
+        </div>
+        <div class="col">
+        <div class="p-field p-col-12 p-md-2">
+          <label for="nrOfBathrooms">Number of bathrooms</label><br>
+          <input pInputText type="number" id="nrOfBathrooms" formControlName="nrOfBathrooms" name="property" size = "40" [class]= "this.emptyNrBathrooms ? 'ng-invalid ng-dirty' : null">
+        </div>
+        </div>
+        </div>
+
+      <div class="row">
+        <div class="col">
+        <div class="p-field p-col-12 p-md-2">
+          <label for="floor">Floor</label><br>
+          <input pInputText type="number" id="floor" formControlName="floor" name="property" size = "40" [class]= "this.emptyFloor ? 'ng-invalid ng-dirty' : null">
+        </div>
+        </div>
+        <div class="col">
+          <div class="p-field p-col-12 p-md-2">
+          <label for="availableFrom">Available from</label><br>
+          <p-inputMask id="availableFrom" mask="9999-99-99" formControlName="availableFrom" [class]= "this.emptyAvailableFrom ? 'ng-invalid ng-dirty' : null">
+          </p-inputMask>
+        </div>
+        </div>
+        </div>
+
+      <div class="row">
+        <div class="col">
+        <div class="p-field p-col-12 p-md-2">
+          <label for="style">Style</label><br>
+          <input pInputText type="text" id="style" formControlName="style" name="property" [class]= "this.emptyStyle ? 'ng-invalid ng-dirty' : null">
+        </div>
+        </div>
+        <div class="col">
+        <div class="p-field p-col-12 p-md-2">
+          <label for="parkingLotsAvailable">Parking lots available</label><br>
+          <input pInputText type="number" id="parkingLotsAvailable" formControlName="parkingLotsAvailable" name="property" size = "40" [class]= "this.emptyParking ? 'ng-invalid ng-dirty' : null">
+        </div>
+        </div>
+      </div>
+
+        <div class="row">
+          <div class=" col-md-offset-1 col-md-4">
+            <label for="profileImage">Upload Image</label>
+            <input id="profileImage" formControlName="propertyImage" class="form-control" type="file" (change)="selectFile($event)">
+          </div>
+        </div>
+      </form>
+    </ng-template>
+    <br><br>
+
+    <ng-template pTemplate="footer">
+      <button pButton type="button" class="p-button-primary" (click)="saveProperty()"> {{'Add'}}</button>
+    </ng-template>
+
+  </p-panel>
+</div>
+

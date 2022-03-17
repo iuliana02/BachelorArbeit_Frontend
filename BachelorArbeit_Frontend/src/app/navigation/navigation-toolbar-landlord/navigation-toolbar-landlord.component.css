@@ -1,0 +1,14 @@
+/* Centered section inside the top navigation */
+.topnav-centered {
+  float: none;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -100%);
+}
+
+.topnav-left {
+  float: none;
+  position: absolute;
+  left: 3%;
+  transform: translate(-10%, -0%);
+}

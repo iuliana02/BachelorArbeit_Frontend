@@ -1,0 +1,45 @@
+
+<!--<p-scrollPanel [style]="{width: '100%', height: '200px'}">-->
+
+  <p-tabMenu class="mainMenu" [model]="items">
+
+    <ng-template pTemplate="item" let-item let-i="index">
+      <div class="tabMenuSpacing">
+        <div [ngClass]="item.icon" *ngIf="item.icon; then Icon ; else noIcon"
+             style="font-size: 2em"></div>
+        <ng-template class="ui-menuitem-icon" #Icon >
+        <div class="ui-menuitem-text">
+          {{item.label}}
+        </div>
+        </ng-template>
+        <ng-template #noIcon >
+          <div class="ui-menuitem-text noIcon">
+            {{item.label}}
+          </div>
+        </ng-template>
+      </div>
+    </ng-template>
+  </p-tabMenu>
+
+<!--</p-scrollPanel>-->
+
+<div class="grid grid-nogutter surface-section text-800">
+  <div class="col-12 md:col-6 p-5 text-center md:text-left flex align-items-center ">
+    <section >
+      <span class="block text-6xl font-bold mb-1"> Who are we?...</span>
+      <div class="text-6xl text-primary font-bold mb-3">We solve your problems with rental management</div>
+      <p class="mt-0 mb-4 text-700 line-height-1">List you properties, find renters, keep track of your properties </p>
+      <p class="mt-0 mb-4 text-700 line-height-1">or... </p>
+      <p class="mt-0 mb-4 text-700 line-height-1">Find rents and stay in touch with your landlord!  </p>
+
+      <button pButton pRipple label="Learn More" type="button" class="mr-3 p-button-raised"></button>
+      <button pButton pRipple label="Live Demo" type="button" class="p-button-outlined"></button>
+    </section>
+  </div>
+  <div class="col-11 md:col-6 overflow-hidden">
+    <img src="assets/first-page-img.jpg" alt="Image" class="md:ml-auto block md:h-full img" style="clip-path: polygon(8%
+     0, 100% 0%,
+    100% 100%, 0 100%)">
+  </div>
+</div>
+

@@ -1,0 +1,86 @@
+<!--<app-home></app-home>-->
+<p-toast position="bottom-center"></p-toast>
+
+<div class="card w-75 classCard" *ngFor="let apartment of this.apartments">
+  <div class="card-body">
+    <h5 class="card-title">Apartment {{apartment.idProperty}}</h5>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-11">
+        </div>
+        <div class="col-sm">
+          <button mat-icon-button (click)="toggleSelected(apartment.idProperty)">
+            <mat-icon
+              *ngIf="apartment.liked"
+              aria-label="Example icon-button with a heart icon">
+              favorite
+            </mat-icon>
+            <mat-icon
+              *ngIf="!apartment.liked"
+              aria-label="Example icon-button with a heart icon">
+              favorite_border
+            </mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+      <p class="card-text">Adress: {{apartment.land}}, {{apartment.city}}, {{apartment.street}}, {{apartment.nr}}</p>
+      <p-tag styleClass="p-mr-2" severity="warning">{{apartment.description}}</p-tag>
+      <p-tag styleClass="p-mr-2"     class="position-absolute top-1 start-50 badge"
+             severity="warning"> Posted on: {{apartment.postDate}}</p-tag>
+      <p class="card-text">Apartment type: {{apartment.divisionType}}, floor: {{apartment.floor}}</p>
+      <input type="button" class="btn btn-primary" value="Image" (click)="getImage(apartment.idProperty)">
+
+      <!--    <img [src]= "imageToShow" width="200px">-->
+      <div class="row">
+        <div class="col-lg-10">
+        </div>
+        <div class="col-sm">
+          <p-button label="Request" icon="pi pi-check" (click)="openVerticallyCentered(content)"></p-button>
+        </div>
+      </div>
+
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Request for rental
+          <h6 class="modal-title"> Tell us a bit more about yourself!</h6>
+        </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="rentalRequest">
+          <div class="form-group">
+            <label for="question1">Where do you work currently?</label>
+            <div class="input-group">
+              <input id="question1" class="form-control" formControlName="question1">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="question2">Where did you live before?</label>
+            <div class="input-group">
+              <input id="question2" class="form-control" formControlName="question2">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="question3">For how much time do you plan to rent the apartment?</label>
+            <div class="input-group">
+              <input id="question3" class="form-control" formControlName="question3">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="sendRentalRequest(apartment)">Send</button>
+      </div>
+    </ng-template>
+
+    </div>
+  </div>
+<!--</div>-->
+
+
+

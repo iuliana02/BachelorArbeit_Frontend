@@ -1,0 +1,54 @@
+<p-toast position="top-right"></p-toast>
+
+<p-menubar [style]="{'background-color': '#ccccff'}">
+  <div class="topnav">
+    <div class="topnav-left">
+  <button pButton icon="pi pi-home" class="p-button-text p-button-secondary profileBtn" (click)="goToHome()"></button>
+    </div>
+    <p-button label="Requests" icon="pi pi-bell"  badge="{{this.notifications}}" (click)="goToRentalRequests()"></p-button>
+
+  <button pButton class="p-button-text p-button-secondary profileBtn">My role: {{role.toUpperCase()}} </button>
+  </div>
+</p-menubar>
+
+
+<div id="profile-info">
+<p-panel>
+<ng-template pTemplate="header">
+  <h4>My profile</h4>
+</ng-template>
+<ng-template pTemplate="content">
+  <form [formGroup]="profileForm" id="profileForm" class="ui-fluid p-formgrid p-grid" *ngIf="this.profileForm">
+    <div class="p-field p-col-12 p-md-2">
+      <label for="firstName">First name</label> <br>
+      <input pInputText type="text" id="firstName" formControlName="firstName" name="profile" size = "40">
+    </div>
+    <div class="p-field p-col-12 p-md-2">
+      <label for="lastName">Last name</label><br>
+      <input pInputText type="text" id="lastName" formControlName="lastName" name="profile" size = "40">
+    </div>
+    <div class="p-field p-col-12 p-md-2">
+      <label for="email">Email</label> <br>
+      <input pInputText type="email" id="email" formControlName="email" name="profile" size = "40" >
+    </div>
+    <div class="p-field p-col-12 p-md-2">
+      <label for="phoneNumber">Phone number</label><br>
+      <p-inputMask id="phoneNumber" mask="(99) 99999999" validateMask="true"
+               formControlName="phoneNumber"> </p-inputMask>
+    </div>
+    <div class="p-field p-col-12 p-md-2">
+      <label for="birthDay">Birthday</label><br>
+      <p-inputMask id="birthDay" mask="9999-99-99" formControlName="birthDay">
+    </p-inputMask>
+    </div>
+  </form>
+</ng-template>
+  <br><br>
+  <ng-template pTemplate="footer">
+    <button pButton type="button" class="p-button-primary" (click)="edit()"> {{'Edit'}}</button>
+    <button pButton type="button" class="p-button-primary" (click)="updateUser()"> {{'Save'}}</button>
+  </ng-template>
+
+</p-panel>
+</div>
+

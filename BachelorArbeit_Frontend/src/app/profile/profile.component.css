@@ -1,0 +1,57 @@
+#editProfileContainer {
+  margin: 0;
+  position: absolute;
+  top: 400px;
+  left: 800px;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+#formContent {
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background: #fff;
+  padding: 30px;
+  width: 100%;
+  max-width: 450px;
+  position: relative;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+#personalInfo {
+  margin: 0;
+  position: absolute;
+  top: 200px;
+  left: 100px;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+#personalInfoContent {
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background: #fff;
+  padding: 30px;
+  width: 100%;
+  max-width: 450px;
+  position: relative;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  /*box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);*/
+  text-align: center;
+}
+
+#profile-info {
+  position: absolute;
+  width: 600px;
+  left: 300px;
+  margin: 0 auto;
+}
+
+.topnav-left {
+  float: none;
+  position: absolute;
+  left: 3%;
+  transform: translate(-10%, -0%);
+}

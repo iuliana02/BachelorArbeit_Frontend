@@ -1,0 +1,27 @@
+<!--<app-navigation-toolbar-landlord></app-navigation-toolbar-landlord>-->
+
+<div class="card w-50 classCard" *ngFor="let request of this.rentalRequests">
+  <div class="card-body">
+    <h5> Request from </h5>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-11">
+        </div>
+        <div class="col-sm">
+
+  </div>
+  Tenant's answers:<br><br>
+        <fieldset disabled>
+    <label for="question1">Where do you work currently?</label>
+    <input type="text" id="question1" class="form-control" placeholder={{request.question1}}>
+    <label for="question2">Where did you live before?</label>
+    <input type="text" id="question2" class="form-control" placeholder={{request.question2}}>
+    <label for="question3">For how much time do you plan to rent the apartment?</label>
+    <input type="text" id="question3" class="form-control" placeholder={{request.question3}}>
+  </fieldset>
+
+      </div>
+    </div>
+  </div>
+</div>

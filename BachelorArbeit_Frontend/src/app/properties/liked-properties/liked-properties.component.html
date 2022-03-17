@@ -1,0 +1,59 @@
+<div class="card w-75 classCard" *ngFor="let apartment of apartments">
+  <div class="card-body">
+    <h5 class="card-title">Apartment {{apartment.idProperty}}</h5>
+
+
+      <p class="card-text">Adress: {{apartment.land}}, {{apartment.city}}, {{apartment.street}}, {{apartment.nr}}</p>
+      <p-tag styleClass="p-mr-2" severity="warning">{{apartment.description}}</p-tag>
+      <p class="card-text">Apartment type: {{apartment.divisionType}}, floor: {{apartment.floor}}</p>
+<!--      <input type="button" class="btn btn-primary" value="Image" (click)="getImage(apartment.idProperty)">-->
+
+<!--      <img [src]= "imageToShow" width="200px">-->
+      <div class="row">
+        <div class="col-lg-10">
+        </div>
+        <div class="col-sm">
+          <p-button label="Request" icon="pi pi-check" (click)="openVerticallyCentered(content)"></p-button>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Request for rental
+      <h6 class="modal-title"> Tell us a bit more about yourself!</h6>
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="workplace">Where do you work currently?</label>
+        <div class="input-group">
+          <input id="workplace" class="form-control" >
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="lived_before">Where did you live before?</label>
+        <div class="input-group">
+          <input id="lived_before" class="form-control" >
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="rental_time">For how much time do you plan to rent the apartment?</label>
+        <div class="input-group">
+          <input id="rental_time" class="form-control" >
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Send</button>
+  </div>
+</ng-template>

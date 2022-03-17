@@ -1,0 +1,6 @@
+.topnav-left {
+  float: none;
+  position: absolute;
+  left: 3%;
+  transform: translate(-10%, -0%);
+}

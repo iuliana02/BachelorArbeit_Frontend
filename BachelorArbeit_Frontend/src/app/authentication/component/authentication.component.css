@@ -1,0 +1,39 @@
+#registerContainer {
+  margin: 0;
+  position: absolute;
+  top: 400px;
+  left: 300px;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+#loginContainer {
+  margin: 0;
+  position: absolute;
+  top: 400px;
+  left:750px;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+#formContentRegister, #formContentLogin {
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background: #fff;
+  padding: 30px;
+  width: 90%;
+  max-width: 450px;
+  position: relative;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.brown {
+  background-color: darkmagenta;
+  border: darkmagenta;
+}
+
+.hover {
+  background-color: darkmagenta;
+  border: darkmagenta;
+}
