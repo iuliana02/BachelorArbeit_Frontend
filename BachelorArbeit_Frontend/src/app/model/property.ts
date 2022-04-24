@@ -2,6 +2,7 @@ import {Address} from "./address";
 import {PropertyDetails} from "./propertyDetails";
 
 export interface Property {
+  apart: any;
   idProperty : number;
   idUser: number;
   land: string;
@@ -12,7 +13,7 @@ export interface Property {
   description: PropertyDetails;
   photoPath: string;
   nrOfRooms: number;
-  nrOfBathromms: number;
+  nrOfBathrooms: number;
   area: number;
   rating: number;
   floor: number;
@@ -21,4 +22,5 @@ export interface Property {
   availableFrom: Date;
   parkingLotsAvailable: number;
   liked: boolean;
+  imagesToShow: any[];
 }

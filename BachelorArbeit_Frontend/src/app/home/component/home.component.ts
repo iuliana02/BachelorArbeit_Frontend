@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
     this.verticalMenu = [
       {
         label: 'Dashboard',
-        url:'home'
+        url:'home-landlord'
       },
       {
         label: 'Profile',
@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
       },
       {
         label: 'My properties',
-          url: 'properties-list'
+          url: 'properties-list-landlord'
         // items:[]
           // {label: 'Rented apartments', url: 'properties-list'} as MenuItem,
           // {label: "Not rented apartments", url: 'properties-list'}] as MenuItem

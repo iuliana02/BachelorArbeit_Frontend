@@ -31,7 +31,7 @@ export class NavigationToolbarTenantComponent implements OnInit {
     // @ts-ignore
     localStorage.setItem('token', null);
 
-    this.router.navigate(['login'])
+    this.router.navigate(['first-page'])
   }
 
 }

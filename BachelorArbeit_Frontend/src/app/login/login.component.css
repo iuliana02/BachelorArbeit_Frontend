@@ -1,18 +1,7 @@
-#registerContainer {
-  margin: 0;
-  position: absolute;
-  top: 400px;
-  left: 300px;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
 #loginContainer {
-  margin: 0;
-  position: absolute;
-  top: 400px;
-  left:750px;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  display: grid;
+  grid-template-rows: 800px 500px;
+  place-items: center;
 }
 
 #formContentRegister, #formContentLogin {

@@ -1,20 +1,18 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {PropertyService} from "../../service/property.service";
-import {User} from "../../model/user";
-import {Property} from "../../model/property";
+import {EventEmitter, Injectable, Input, Output} from '@angular/core';
+import {User} from "../model/user";
+import {Property} from "../model/property";
 import {FormControl, FormGroup} from "@angular/forms";
+import {PropertyService} from "../service/property.service";
+import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {MessageService} from "primeng/api";
 import {DomSanitizer} from "@angular/platform-browser";
-import {UserService} from "../../service/user.service";
-import {RentalRequest} from "../../model/rentalRequest";
+import {UserService} from "../service/user.service";
+import {RentalRequest} from "../model/rentalRequest";
 
-@Component({
-  selector: 'app-liked-properties',
-  templateUrl: './liked-properties.component.html',
-  styleUrls: ['./liked-properties.component.css']
+@Injectable({
+  providedIn: 'root'
 })
-export class LikedPropertiesComponent implements OnInit {
+export class PropertyServiceService {
   idUser: any;
   currentUser = {} as User;
   apartments: Property[] = [];
@@ -36,12 +34,11 @@ export class LikedPropertiesComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.idUser = localStorage.getItem("idUser");
     this.userService.getUserById(this.idUser).subscribe(result => {
       this.currentUser = result.data;
     })
 
-    await this.propertyService.getLikedApartments(this.idUser).toPromise().then(response => {
+    await this.propertyService.getAllProperties().toPromise().then(response => {
       if (response.success) {
         this.apartments = response.data;
       }

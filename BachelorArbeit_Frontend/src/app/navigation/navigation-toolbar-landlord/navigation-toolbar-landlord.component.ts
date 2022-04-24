@@ -23,13 +23,14 @@ export class NavigationToolbarLandlordComponent implements OnInit {
     // @ts-ignore
     // localStorage.setItem('username', null);
     // @ts-ignore
-    localStorage.setItem('email', null);
-    // @ts-ignore
-    localStorage.setItem('fullName', null);
-    // @ts-ignore
-    localStorage.setItem('token', null);
+    // localStorage.setItem('email', null);
+    // // @ts-ignore
+    // localStorage.setItem('fullName', null);
+    // // @ts-ignore
+    // localStorage.setItem('token', null);
 
-    this.router.navigate(['login'])
+    localStorage.clear()
+    this.router.navigate(['first-page'])
   }
 
   goToHome() {

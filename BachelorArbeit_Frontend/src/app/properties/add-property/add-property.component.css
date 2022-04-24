@@ -1,6 +1,27 @@
-#property-form {
-  position: absolute;
-  width: 800px;
-  left: 300px;
-  margin: 0 auto;
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.property-form {
+  min-width: 800px;
+}
+
+#buttonEstimate {
+  left: 560px;
+}
+
+#predictedPrice {
+  margin-left: 280px;
+}
+#spinnerPredictedPrice {
+  margin-left: 280px;
+}
+
+.centerDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

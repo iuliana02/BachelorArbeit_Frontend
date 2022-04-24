@@ -1,13 +1,14 @@
 <p-toast position="top-right"></p-toast>
 
-<div id="property-form">
-  <p-panel>
+<div id="property-form" class="container">
+  <p-panel class="property-form">
     <ng-template pTemplate="header">
       <h4>Register a new property</h4>
     </ng-template>
     <ng-template pTemplate="content">
+      <div class="centerDiv">
       <form [formGroup]="newPropertyForm" id="propertyForm" class="ui-fluid p-formgrid p-grid" *ngIf="this.newPropertyForm">
-      <h4> Address information</h4>
+<!--      <h4> Address information</h4>-->
       <div class="row">
         <div class="col">
         <div class="p-field p-col-12 p-md-2">
@@ -42,7 +43,7 @@
 
       <div class="p-field p-col-12 p-md-2">
         <label for="description">Description</label><br>
-        <textarea pInputText id="description" formControlName="description" name="property" rows="3" style="resize: none;" cols="40" [class]= "this.emptydescription ? 'ng-invalid ng-dirty' : null"></textarea>
+        <textarea pInputText id="description" formControlName="description" name="property" rows="3" style="resize: none;" cols="75" [class]= "this.emptydescription ? 'ng-invalid ng-dirty' : null"></textarea>
       </div>
 
       <div class="row">
@@ -106,20 +107,36 @@
         </div>
       </div>
 
-        <div class="row">
-          <div class=" col-md-offset-1 col-md-4">
-            <label for="profileImage">Upload Image</label>
-            <input id="profileImage" formControlName="propertyImage" class="form-control" type="file" (change)="selectFile($event)">
-          </div>
-        </div>
+      <p-fileUpload [customUpload]="true" (uploadHandler)="onUpload($event)" id="profileImage"
+                    formControlName="propertyImage" class="form-control" type="file" [multiple]="true">
+        <ng-template pTemplate="content">
+          <ul>
+            <li *ngFor="let file of this.uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+          </ul>
+        </ng-template>
+      </p-fileUpload>
+
+
       </form>
+      </div>
     </ng-template>
     <br><br>
 
     <ng-template pTemplate="footer">
       <button pButton type="button" class="p-button-primary" (click)="saveProperty()"> {{'Add'}}</button>
+      <button pButton id="buttonEstimate" type="button" class="p-button-help p-button-rounded" (click)="predictPrice()"> {{'Estimate price'}}</button>
+      <div *ngIf="!anyFieldEmpty">
+        <div *ngIf="!spinning" class="container mb-3 font-bold text-2xl">
+          <span class="text-900">The recommended rent price is: </span> <br>
+          <p-chip class="text-2xl">{{predictedPrice}}</p-chip>
+        </div>
+        <div *ngIf="spinning" id="spinnerPredictedPrice">
+          <mat-spinner [diameter]="50"></mat-spinner>
+        </div>
+      </div>
     </ng-template>
 
   </p-panel>
 </div>
+
 

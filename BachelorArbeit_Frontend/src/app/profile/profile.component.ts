@@ -42,7 +42,7 @@ export class ProfileComponent implements OnInit {
       }
     )
 
-    this.rentalRequestService.getNumberOfRentalRequests(this.user.userId).subscribe(response => {
+    this.rentalRequestService.getNumberOfRentalRequests(this.user.idUser).subscribe(response => {
         this.notifications = response.data;
         console.log(response)
       }

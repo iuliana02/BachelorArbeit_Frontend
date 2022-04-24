@@ -2,3 +2,8 @@
   /*position: absolute;*/
   left: 200px;
 }
+
+.flex-container {
+  display: inline-block;
+}
+

@@ -24,7 +24,7 @@ import {HomeModule} from "./home/home.module";
 import {NavigationModule} from "./navigation/navigation.module";
 import {DividerModule} from "primeng/divider";
 import {InputMaskModule} from "primeng/inputmask";
-import { PropertiesListComponent } from './properties/properties-list/properties-list.component';
+import { PropertiesListComponent } from './properties/properties-list_tenants/properties-list.component';
 import { AddPropertyComponent } from './properties/add-property/add-property.component';
 import {FileUploadModule} from "primeng/fileupload";
 import {TagModule} from "primeng/tag";
@@ -38,9 +38,15 @@ import {MatButtonModule} from "@angular/material/button";
 import { RentalRequestComponent } from './rental-request/rental-request.component';
 import { FirstPageComponent } from './first-page/first-page.component';
 import {ScrollPanelModule} from "primeng/scrollpanel";
-import {MatMenuItem} from "@angular/material/menu";
 import {TabMenuModule} from "primeng/tabmenu";
 import {RippleModule} from "primeng/ripple";
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
+import { FirstPageNavigationComponent } from './first-page-navigation/first-page-navigation.component';
+import {ChipModule} from "primeng/chip";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { PropertiesListLandlordComponent } from './properties/properties-list-landlord/properties-list-landlord.component';
+import {GalleriaModule} from "primeng/galleria";
 
 @NgModule({
   declarations: [
@@ -53,42 +59,49 @@ import {RippleModule} from "primeng/ripple";
     HomeTenantComponent,
     LikedPropertiesComponent,
     RentalRequestComponent,
-    FirstPageComponent
+    FirstPageComponent,
+    LoginComponent,
+    SignupComponent,
+    FirstPageNavigationComponent,
+    PropertiesListLandlordComponent
   ],
-  imports: [
-    CommonModule,
-    BrowserAnimationsModule,
-    BrowserModule,
-    ButtonModule,
-    InputTextModule,
-    ReactiveFormsModule,
-    RouterModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ToastModule,
-    SidebarModule,
-    MenubarModule,
-    BadgeModule,
-    AccordionModule,
-    CardModule,
-    PanelModule,
-    MegaMenuModule,
-    FormsModule,
-    HomeModule,
-    NavigationModule,
-    DividerModule,
-    InputMaskModule,
-    FileUploadModule,
-    TagModule,
-    ImageModule,
-    HomeModule,
-    NgbModule,
-    MatIconModule,
-    MatButtonModule,
-    ScrollPanelModule,
-    TabMenuModule,
-    RippleModule
-  ],
+    imports: [
+        CommonModule,
+        BrowserAnimationsModule,
+        BrowserModule,
+        ButtonModule,
+        InputTextModule,
+        ReactiveFormsModule,
+        RouterModule,
+        AppRoutingModule,
+        HttpClientModule,
+        ToastModule,
+        SidebarModule,
+        MenubarModule,
+        BadgeModule,
+        AccordionModule,
+        CardModule,
+        PanelModule,
+        MegaMenuModule,
+        FormsModule,
+        HomeModule,
+        NavigationModule,
+        DividerModule,
+        InputMaskModule,
+        FileUploadModule,
+        TagModule,
+        ImageModule,
+        HomeModule,
+        NgbModule,
+        MatIconModule,
+        MatButtonModule,
+        ScrollPanelModule,
+        TabMenuModule,
+        RippleModule,
+        ChipModule,
+        MatProgressSpinnerModule,
+        GalleriaModule
+    ],
   providers: [MessageService],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {SharedService} from "./SharedService";
+import {AuthService} from "./service/auth.service";
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,7 @@ import {SharedService} from "./SharedService";
 export class AppComponent implements OnInit{
   title = 'AppFrontend';
 
-  constructor(public sharedService:  SharedService) {
+  constructor(public sharedService:  SharedService, public authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -25,5 +26,9 @@ export class AppComponent implements OnInit{
 
   isLoggedInAsTenant(): boolean {
     return localStorage.getItem('email') !== null && localStorage.getItem('token') !== null && localStorage.getItem('role')=="tenant"
+  }
+
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
   }
 }

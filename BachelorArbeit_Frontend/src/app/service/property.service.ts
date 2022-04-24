@@ -45,12 +45,7 @@ export class PropertyService {
   }
 
 
-  async getImage(idProperty: number) {
-    console.log("before")
-    let idPhoto = await this.getPhotoIds(idProperty);
-    console.log(idPhoto)
-    console.log("after")
-
+  getImage (idPhoto: number) {
     const options = {
       headers: {
         'Access-Control-Allow-Origin': '*',
@@ -58,14 +53,12 @@ export class PropertyService {
         "Content-Type": "application/json"
       }
     };
-    await (10000)
-    return this.http.get(`http://localhost:4201/property/get/${idPhoto}`, options);
+    return this.http.get(`http://localhost:4201/property/get/` + idPhoto, options);
   }
 
 
 
-  async getPhotoIds(idProperty: number) {
-    let idPhoto: any;
+   getPhotoIds(idProperty: number): Observable<any> {
     const options = {
       headers: {
         'Access-Control-Allow-Origin': '*',
@@ -73,12 +66,7 @@ export class PropertyService {
         "Content-Type": "application/json"
       }
     };
-    await this.backendService.get(`${this.baseURL}/getPhotoIds/` + idProperty, options).subscribe(res => {
-        idPhoto = res.data;
-        console.log("ID PROPERTY" + idProperty)
-        console.log("ID PHOTO" + idPhoto)
-      });
-    return idPhoto;
+    return this.backendService.get(`${this.baseURL}/getPhotoIds/` + idProperty, options);
   }
 
 
@@ -108,11 +96,10 @@ export class PropertyService {
     return this.backendService.post(`${this.baseURL}/removeFromLikedApartments`,null, params);
   }
 
-  getLikedApartments(userId: number) {
+  getLikedApartments(userId: number): Observable<any>  {
     let params = new HttpParams();
     params = params.append('userId', userId);
     return this.backendService.get(`${this.baseURL}/getLikedApartments`, params);
-
   }
 
   sendRentalRequest(rentalRequest: RentalRequest, idLandlord: number, idTenant: number , idProperty: number){
@@ -122,6 +109,11 @@ export class PropertyService {
     params = params.append('idProperty', idProperty);
     const body = JSON.stringify(rentalRequest);
     return this.backendService.post(`http://localhost:4201/rentalRequest/add`, body, params);
+  }
+
+  predictPrice(apartment: Property) {
+    const body = JSON.stringify(apartment);
+    return this.backendService.post(`${this.baseURL}/predict`, body);
   }
 
 }

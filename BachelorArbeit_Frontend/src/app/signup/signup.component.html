@@ -1,4 +1,3 @@
-<p-toast position="top-right"></p-toast>
 
 <div id="registerContainer" *ngIf="registerForm" >
   <div class="wrapper fadeInDown">
@@ -18,23 +17,6 @@
              placeholder="{{'Password'}}">
       <br><br>
       <button pButton type="button" (click)="register()" class="p-button-primary"> {{'Register'}}</button>
-    </div>
-  </div>
-</div>
-
-<div id="loginContainer" *ngIf="loginForm">
-  <div class="wrapper fadeInDown">
-    <h2>Already registered?... </h2>
-    <button pButton type="button" (click)="showLogin()" class="p-button-primary"> {{'Login'}}</button>
-    <div [formGroup]="loginForm" id="formContentLogin" *ngIf="loginButton">
-      <p>Login</p>
-      <!-- Login Form -->
-      <input pInputText type="email" id="emailLogin" formControlName="emailLogin" name="login"
-             placeholder="{{'Email'}}">
-      <input pInputText type="password" id="passwordLogin" formControlName="passwordLogin" name="login"
-             placeholder="{{'Password'}}">
-      <br><br>
-      <button pButton type="button" (click)="login()" class="p-button-primary"> {{'Login'}}</button>
     </div>
   </div>
 </div>

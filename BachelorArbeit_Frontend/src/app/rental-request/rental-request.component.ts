@@ -18,7 +18,7 @@ export class RentalRequestComponent implements OnInit {
               private userService: UserService) { }
 
   ngOnInit(): void {
-    this.getRentalRequestsForLandlord(2)
+    this.getRentalRequestsForLandlord(Number(localStorage.getItem('idUser')))
   }
 
   getRentalRequestsForLandlord(idLandlord: number) {

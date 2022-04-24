@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import { Observable } from 'rxjs';
-import {AuthService} from "../authentication/auth.service";
+import {AuthService} from "../service/auth.service";
 
 @Injectable({
   providedIn: 'root'
@@ -14,15 +14,20 @@ export class RoleGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     let url: string = state.url;
-    return this.checkUserLogin(next, url);
+    return this.checkUserLogin(next);
   }
 
-  checkUserLogin(route: ActivatedRouteSnapshot, url: any): boolean {
+  checkUserLogin(route: ActivatedRouteSnapshot): boolean {
     if (this.authService.isLoggedIn()) {
       const userRole = this.authService.getRole();
-      if (route.data['role'] && route.data['role'].indexOf(userRole) === -1) {
-        this.router.navigate(['/home']);
-        return false;
+      if (route.data['role'] == "landlord") {
+          this.router.navigate(['home-landlord']);
+          return false;
+        // else if (route.data['role'] == 'landlord')
+        // {
+        //   this.router.navigate(['home-landlord']);
+        //   return false;
+        // }
       }
       return true;
     }

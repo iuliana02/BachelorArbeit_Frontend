@@ -1,20 +1,24 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {MegaMenuItem, MessageService} from "primeng/api";
 import {PropertyService} from "../../service/property.service";
-import {User} from "../../model/user";
-import {Property} from "../../model/property";
-import {FormControl, FormGroup} from "@angular/forms";
-import {MessageService} from "primeng/api";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
 import {DomSanitizer} from "@angular/platform-browser";
-import {UserService} from "../../service/user.service";
+import {BackendService} from "../../backend/backend.service";
+import {Router} from "@angular/router";
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Property} from "../../model/property";
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {RentalRequest} from "../../model/rentalRequest";
+import {User} from "../../model/user";
+import {UserService} from "../../service/user.service";
+
 
 @Component({
-  selector: 'app-liked-properties',
-  templateUrl: './liked-properties.component.html',
-  styleUrls: ['./liked-properties.component.css']
+  templateUrl: './properties-list.component.html',
+  styleUrls: ['./properties-list.component.css']
 })
-export class LikedPropertiesComponent implements OnInit {
+export class PropertiesListComponent implements OnInit {
   idUser: any;
   currentUser = {} as User;
   apartments: Property[] = [];
@@ -41,7 +45,7 @@ export class LikedPropertiesComponent implements OnInit {
       this.currentUser = result.data;
     })
 
-    await this.propertyService.getLikedApartments(this.idUser).toPromise().then(response => {
+    await this.propertyService.getAllProperties().toPromise().then(response => {
       if (response.success) {
         this.apartments = response.data;
       }
@@ -159,12 +163,12 @@ export class LikedPropertiesComponent implements OnInit {
       if (response.success) {
         this.currentUser.likedApartments = response.data;
       }})
-    for (let ap of this.currentUser.likedApartments) {
-      if (ap.idProperty == propertyId) {
-        return true;
+      for (let ap of this.currentUser.likedApartments) {
+        if (ap.idProperty == propertyId) {
+          return true;
+        }
       }
-    }
-    return false;
+      return false;
   }
 
 

@@ -1,0 +1,13 @@
+.classCard {
+  left: 200px;
+  min-width: 200px;
+}
+
+.flex-container {
+  display: inline-block;
+}
+
+/*.flex-child {*/
+/*  flex: 1;*/
+/*  border: 2px solid yellow;*/
+/*}*/

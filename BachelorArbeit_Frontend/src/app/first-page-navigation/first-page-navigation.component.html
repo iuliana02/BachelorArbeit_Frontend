@@ -1,0 +1,19 @@
+<p-tabMenu class="mainMenu" [model]="items">
+
+  <ng-template pTemplate="item" let-item let-i="index">
+    <div class="tabMenuSpacing">
+      <div [ngClass]="item.icon" *ngIf="item.icon; then Icon ; else noIcon"
+           style="font-size: 2em"></div>
+      <ng-template class="ui-menuitem-icon" #Icon >
+        <div class="ui-menuitem-text">
+          {{item.label}}
+        </div>
+      </ng-template>
+      <ng-template #noIcon >
+        <div class="ui-menuitem-text noIcon">
+          {{item.label}}
+        </div>
+      </ng-template>
+    </div>
+  </ng-template>
+</p-tabMenu>

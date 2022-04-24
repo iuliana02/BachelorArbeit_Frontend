@@ -1,5 +1,7 @@
+import {Property} from "./property";
+
 export interface User {
-  userId: number;
+  idUser: number;
   firstName: string;
   lastName: string;
   mobileNumber: string;
@@ -9,4 +11,5 @@ export interface User {
   status: number;
   token: string;
   birthDay: Date;
+  likedApartments: any[];
 }

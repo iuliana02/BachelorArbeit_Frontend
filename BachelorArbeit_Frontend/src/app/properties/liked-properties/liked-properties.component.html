@@ -1,59 +1,117 @@
-<div class="card w-75 classCard" *ngFor="let apartment of apartments">
+<!--<app-home></app-home>-->
+<p-toast position="bottom-center"></p-toast>
+
+<div class="card w-75 classCard" *ngFor="let apartment of this.apartments">
   <div class="card-body">
-    <h5 class="card-title">Apartment {{apartment.idProperty}}</h5>
+    <h5 class="card-title text-900">Apartment with {{apartment.nrOfRooms +' rooms, ' + apartment.divisionType + ', ' + apartment.area + ' mp2'}}</h5>
 
-
-      <p class="card-text">Adress: {{apartment.land}}, {{apartment.city}}, {{apartment.street}}, {{apartment.nr}}</p>
-      <p-tag styleClass="p-mr-2" severity="warning">{{apartment.description}}</p-tag>
-      <p class="card-text">Apartment type: {{apartment.divisionType}}, floor: {{apartment.floor}}</p>
-<!--      <input type="button" class="btn btn-primary" value="Image" (click)="getImage(apartment.idProperty)">-->
-
-<!--      <img [src]= "imageToShow" width="200px">-->
+    <div class="container">
       <div class="row">
-        <div class="col-lg-10">
+        <div class="col-11">
         </div>
         <div class="col-sm">
-          <p-button label="Request" icon="pi pi-check" (click)="openVerticallyCentered(content)"></p-button>
+          <button mat-icon-button (click)="toggleSelected(apartment.idProperty)">
+            <mat-icon
+              *ngIf="apartment.liked"
+              aria-label="Example icon-button with a heart icon">
+              favorite
+            </mat-icon>
+            <mat-icon
+              *ngIf="!apartment.liked"
+              aria-label="Example icon-button with a heart icon">
+              favorite_border
+            </mat-icon>
+          </button>
         </div>
       </div>
-
-
     </div>
-  </div>
+
+    <p-tag styleClass="p-mr-2"  class="position-absolute top-1 start-50 badge"
+           severity="warning"> Posted on: {{apartment.postDate}}
+    </p-tag>
+
+    <ul>
+      <li class="flex py-2" >
+        <div class="text-600 font-medium"> <mat-icon> place</mat-icon> </div>
+        <div class="text-900 md:w-4 md:flex-order-1 flex-order-1" style="padding-left: 10px">{{apartment.land}}, {{apartment.city}}, {{apartment.street}}, {{apartment.nr}}</div>
+      </li>
+      <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap" style="align-items: center">
+        <div class="text-600 font-medium"> <mat-icon> settings_overscan</mat-icon> </div>
+        <div class="text-900" style="padding-left: 10px">{{apartment.area}} mp2</div>
+        <div class="text-600 font-medium" style="padding-left: 20px"> <mat-icon>style</mat-icon> </div>
+        <div class="text-900" style="padding-left: 10px">{{apartment.style}}</div>
+        <div class="text-600 font-medium" style="padding-left: 20px"> 	<mat-icon> vpn_key</mat-icon> </div>
+        <div class="text-900" style="padding-left: 10px">{{apartment.nrOfRooms}} rooms</div>
+      </li>
+
+      <li class="flex align-items-center py-3 px-2 border-top-1 border-bottom-1 surface-border flex-wrap">
+        <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1 line-height-3">
+          {{apartment.description}}</div>
+      </li>
+    </ul>
+
+    <div *ngFor="let img of apartment.imagesToShow" class="flex-container" style="padding-left: 40px">
+      <p-image  [src]= 'img' width="200px" [preview]="true"></p-image>
+    </div>
+    <!--    <p-galleria [value]="this.imagesToShow" [responsiveOptions]="responsiveOptions" [containerStyle]="{'max-width': '640px'}" [numVisible]="5">-->
+    <!--      <ng-template pTemplate="item" let-item>-->
+    <!--        <img [src]="item" style="width: 100%;" />-->
+    <!--      </ng-template>-->
+    <!--      <ng-template pTemplate="thumbnail" let-item>-->
+    <!--        <div class="grid grid-nogutter justify-content-center">-->
+    <!--          <img [src]="item" />-->
+    <!--        </div>-->
+    <!--      </ng-template>-->
+    <!--    </p-galleria>-->
 
 
-<ng-template #content let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Request for rental
-      <h6 class="modal-title"> Tell us a bit more about yourself!</h6>
-    </h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form>
-      <div class="form-group">
-        <label for="workplace">Where do you work currently?</label>
-        <div class="input-group">
-          <input id="workplace" class="form-control" >
-        </div>
+    <div class="row" style="padding-top: 20px">
+      <div class="col-lg-5">
       </div>
-      <div class="form-group">
-        <label for="lived_before">Where did you live before?</label>
-        <div class="input-group">
-          <input id="lived_before" class="form-control" >
-        </div>
+      <div class="col-sm">
+        <p-button label="Request" icon="pi pi-check" (click)="openVerticallyCentered(content)"></p-button>
       </div>
-      <div class="form-group">
-        <label for="rental_time">For how much time do you plan to rent the apartment?</label>
-        <div class="input-group">
-          <input id="rental_time" class="form-control" >
-        </div>
+    </div>
+
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Request for rental
+          <h6 class="modal-title"> Tell us a bit more about yourself!</h6>
+        </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-    </form>
+      <div class="modal-body">
+        <form [formGroup]="rentalRequest">
+          <div class="form-group">
+            <label for="question1">Where do you work currently?</label>
+            <div class="input-group">
+              <input id="question1" class="form-control" formControlName="question1">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="question2">Where did you live before?</label>
+            <div class="input-group">
+              <input id="question2" class="form-control" formControlName="question2">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="question3">For how much time do you plan to rent the apartment?</label>
+            <div class="input-group">
+              <input id="question3" class="form-control" formControlName="question3">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="sendRentalRequest(apartment)">Send</button>
+      </div>
+    </ng-template>
+
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Send</button>
-  </div>
-</ng-template>
+</div>
+<!--</div>-->
+
+
+
