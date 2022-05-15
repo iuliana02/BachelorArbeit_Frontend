@@ -3,7 +3,8 @@
 
 <div class="card w-75 classCard" *ngFor="let apartment of this.apartments">
   <div class="card-body">
-    <h5 class="card-title text-900">Apartment with {{apartment.nrOfRooms +' rooms, ' + apartment.divisionType + ', ' + apartment.area + ' mp2'}}</h5>
+    <h5 class="card-title text-900">Apartment
+      with {{apartment.nrOfRooms + ' rooms, ' + apartment.divisionType + ', ' + apartment.area + ' mp2'}}</h5>
 
     <div class="container">
       <div class="row">
@@ -26,21 +27,30 @@
       </div>
     </div>
 
-    <p-tag styleClass="p-mr-2"  class="position-absolute top-1 start-50 badge"
+    <p-tag styleClass="p-mr-2" class="position-absolute top-1 start-50 badge"
            severity="warning"> Posted on: {{apartment.postDate}}
     </p-tag>
 
     <ul>
-      <li class="flex py-2" >
-        <div class="text-600 font-medium"> <mat-icon> place</mat-icon> </div>
-        <div class="text-900 md:w-4 md:flex-order-1 flex-order-1" style="padding-left: 10px">{{apartment.land}}, {{apartment.city}}, {{apartment.street}}, {{apartment.nr}}</div>
+      <li class="flex py-2">
+        <div class="text-600 font-medium">
+          <mat-icon> place</mat-icon>
+        </div>
+        <div class="text-900 md:w-4 md:flex-order-1 flex-order-1" style="padding-left: 10px">{{apartment.land}}
+          , {{apartment.city}}, {{apartment.street}}, {{apartment.nr}}</div>
       </li>
       <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap" style="align-items: center">
-        <div class="text-600 font-medium"> <mat-icon> settings_overscan</mat-icon> </div>
+        <div class="text-600 font-medium">
+          <mat-icon> settings_overscan</mat-icon>
+        </div>
         <div class="text-900" style="padding-left: 10px">{{apartment.area}} mp2</div>
-        <div class="text-600 font-medium" style="padding-left: 20px"> <mat-icon>style</mat-icon> </div>
+        <div class="text-600 font-medium" style="padding-left: 20px">
+          <mat-icon>style</mat-icon>
+        </div>
         <div class="text-900" style="padding-left: 10px">{{apartment.style}}</div>
-        <div class="text-600 font-medium" style="padding-left: 20px"> 	<mat-icon> vpn_key</mat-icon> </div>
+        <div class="text-600 font-medium" style="padding-left: 20px">
+          <mat-icon> vpn_key</mat-icon>
+        </div>
         <div class="text-900" style="padding-left: 10px">{{apartment.nrOfRooms}} rooms</div>
       </li>
 
@@ -51,7 +61,7 @@
     </ul>
 
     <div *ngFor="let img of apartment.imagesToShow" class="flex-container" style="padding-left: 40px">
-      <p-image  [src]= 'img' width="200px" [preview]="true"></p-image>
+      <p-image [src]='img' width="200px" [preview]="true"></p-image>
     </div>
     <!--    <p-galleria [value]="this.imagesToShow" [responsiveOptions]="responsiveOptions" [containerStyle]="{'max-width': '640px'}" [numVisible]="5">-->
     <!--      <ng-template pTemplate="item" let-item>-->
@@ -64,14 +74,20 @@
     <!--      </ng-template>-->
     <!--    </p-galleria>-->
 
-
-      <div class="row" style="padding-top: 20px">
-        <div class="col-lg-5">
+    <div class="container">
+    <div class="container2" style="padding-top: 20px">
+        <div class="col-sm price">
+          Price: {{apartment.price}} €
         </div>
-        <div class="col-sm">
+    </div>
+    <div class="container2" style="padding-top: 20px">
+<!--      <div class="col-7">-->
+<!--        <div class="col-sm">-->
           <p-button label="Request" icon="pi pi-check" (click)="openVerticallyCentered(content)"></p-button>
-        </div>
-      </div>
+<!--        </div>-->
+<!--      </div>-->
+    </div>
+    </div>
 
     <ng-template #content let-modal>
       <div class="modal-header">
@@ -109,8 +125,8 @@
       </div>
     </ng-template>
 
-    </div>
   </div>
+</div>
 <!--</div>-->
 
 

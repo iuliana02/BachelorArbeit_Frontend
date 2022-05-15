@@ -12,6 +12,8 @@ import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {RentalRequest} from "../../model/rentalRequest";
 import {User} from "../../model/user";
 import {UserService} from "../../service/user.service";
+import {Stomp} from "@stomp/stompjs";
+import {AppComponent} from "../../app.component";
 
 
 @Component({
@@ -50,6 +52,8 @@ export class PropertiesListComponent implements OnInit {
         this.apartments = response.data;
       }
     });
+
+    console.log(this.apartments)
 
     for (let apart of this.apartments) {
       apart.imagesToShow = await this.getImages(apart.idProperty)
@@ -205,4 +209,20 @@ export class PropertiesListComponent implements OnInit {
       }
     );
   }
+
+  // connect(event: any) {
+  //   username = document.querySelector('#name').value.trim();
+  //
+  //   if(username) {
+  //     usernamePage.classList.add('hidden');
+  //     chatPage.classList.remove('hidden');
+  //
+  //     var socket = new SockJS('/javatechie');
+  //     let stompClient = Stomp.over(socket);
+  //
+  //     stompClient.connect({}, onConnected, onError);
+  //   }
+  //   event.preventDefault();
+  // }
+
 }

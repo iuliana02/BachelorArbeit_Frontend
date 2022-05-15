@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {BackendService} from "../backend/backend.service";
 import {Observable} from "rxjs";
-import {HttpParams} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ import {HttpParams} from "@angular/common/http";
 export class RentalRequestService {
   private baseURL = 'http://localhost:4201/rentalRequest';
 
-  constructor(private backendService: BackendService) { }
+  constructor(private backendService: BackendService, private http: HttpClient) { }
 
   public getNumberOfRentalRequests(idLandlord: number): Observable<any> {
     let params = new HttpParams();
@@ -17,9 +17,15 @@ export class RentalRequestService {
     return this.backendService.get(`${this.baseURL}/getNumberOfRentalRequests`, params)
   }
 
-  public getRentalRequestsForLandlord(idLandlord: number): Observable<any> {
+  public getRentalRequestsForLandlord(idLandlord: number):Observable<any> {
     let params = new HttpParams();
     params = params.append('idUser', idLandlord);
     return this.backendService.get(`${this.baseURL}/getRequestsForLandlord`, params)
+  }
+
+  public removeRentalrequest(propertyId: number) {
+    let params = new HttpParams();
+    params = params.append('propertyId', propertyId);
+    return this.backendService.post(`${this.baseURL}/deleteRequestByPropertyId`,null, params)
   }
 }

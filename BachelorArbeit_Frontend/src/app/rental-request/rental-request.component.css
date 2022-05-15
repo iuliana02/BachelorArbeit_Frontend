@@ -2,3 +2,11 @@
   left: 500px;
   width: 400px;
 }
+
+.centered {
+  /*float: none;*/
+  /*position: absolute;*/
+  /*left: 50%;*/
+  place-items: center;
+  /*transform: translate(50%, 50%);*/
+}

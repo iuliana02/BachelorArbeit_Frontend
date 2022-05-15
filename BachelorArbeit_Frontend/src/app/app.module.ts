@@ -47,6 +47,9 @@ import {ChipModule} from "primeng/chip";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { PropertiesListLandlordComponent } from './properties/properties-list-landlord/properties-list-landlord.component';
 import {GalleriaModule} from "primeng/galleria";
+import {LoggedInGuard} from "./guards/loggedin-guard";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 @NgModule({
   declarations: [
@@ -100,9 +103,10 @@ import {GalleriaModule} from "primeng/galleria";
         RippleModule,
         ChipModule,
         MatProgressSpinnerModule,
-        GalleriaModule
+        GalleriaModule,
+        FontAwesomeModule
     ],
-  providers: [MessageService],
+  providers: [MessageService, LoggedInGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -25,7 +25,7 @@ const routes: Routes = [
   },
   {
     path:'first-page',
-    component: FirstPageComponent
+    component: FirstPageComponent,
   },
   {
     path:'login',
@@ -42,6 +42,7 @@ const routes: Routes = [
     // data: {
     //   role: 'landlord'
     // }
+    canActivate:[LoggedInGuard]
   },
   {
     path: 'home-tenant',
@@ -50,34 +51,42 @@ const routes: Routes = [
     // data: {
     //   role: 'tenant'
     // }
+    canActivate:[LoggedInGuard]
   },
   {
     path: 'profile',
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate:[LoggedInGuard]
   },
   {
     path: 'properties-list',
-    component: PropertiesListComponent
+    component: PropertiesListComponent,
+    canActivate:[LoggedInGuard]
   },
   {
     path: 'properties-list-landlord',
-    component: PropertiesListLandlordComponent
+    component: PropertiesListLandlordComponent,
+    canActivate:[LoggedInGuard]
   },
   {
     path: 'liked-properties',
-    component: LikedPropertiesComponent
+    component: LikedPropertiesComponent,
+    canActivate:[LoggedInGuard]
   },
   {
     path: 'add-property',
-    component: AddPropertyComponent
+    component: AddPropertyComponent,
+    canActivate:[LoggedInGuard]
   },
   {
     path: 'tenants-list',
-    component: TenantsListComponent
+    component: TenantsListComponent,
+    canActivate:[LoggedInGuard]
   },
   {
     path: 'rental-request',
-    component: RentalRequestComponent
+    component: RentalRequestComponent,
+    canActivate:[LoggedInGuard]
   }
 ];
 

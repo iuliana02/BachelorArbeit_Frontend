@@ -128,12 +128,22 @@
       <div *ngIf="!anyFieldEmpty">
         <div *ngIf="!spinning" class="container mb-3 font-bold text-2xl">
           <span class="text-900">The recommended rent price is: </span> <br>
-          <p-chip class="text-2xl">{{predictedPrice}}</p-chip>
+          <br> <p-chip class="text-2xl">{{predictedPrice}}</p-chip>
+
+          <form [formGroup]="newPropertyForm">
+            <div class="text-500">
+              Keep the predicted price or choose your price:
+              <input pInputText type="text" id="price" formControlName="price" name="property" placeholder="{{predictedPrice}}">
+            </div>
+          </form>
+
         </div>
         <div *ngIf="spinning" id="spinnerPredictedPrice">
           <mat-spinner [diameter]="50"></mat-spinner>
         </div>
       </div>
+
+
     </ng-template>
 
   </p-panel>

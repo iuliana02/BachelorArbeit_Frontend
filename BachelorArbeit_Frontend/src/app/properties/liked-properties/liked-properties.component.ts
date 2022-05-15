@@ -8,6 +8,8 @@ import {MessageService} from "primeng/api";
 import {DomSanitizer} from "@angular/platform-browser";
 import {UserService} from "../../service/user.service";
 import {RentalRequest} from "../../model/rentalRequest";
+import { ChangeDetectorRef } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-liked-properties',
@@ -26,13 +28,16 @@ export class LikedPropertiesComponent implements OnInit {
   message!: string;
   closeResults: any;
   rentalRequest: FormGroup;
+  noLikedApartments: boolean;
 
   @Input() selected: boolean = false;
   @Output() selectedChange = new EventEmitter<boolean>();
 
   constructor(public propertyService: PropertyService, private modalService: NgbModal,
               private messageService: MessageService, private sanitizer: DomSanitizer,
-              private userService: UserService) {
+              private userService: UserService, private router: Router) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+
   }
 
   async ngOnInit(): Promise<void> {
@@ -46,6 +51,8 @@ export class LikedPropertiesComponent implements OnInit {
         this.apartments = response.data;
       }
     });
+    if (this.apartments.length==0)
+      this.noLikedApartments = true;
 
     for (let apart of this.apartments) {
       apart.imagesToShow = await this.getImages(apart.idProperty)
@@ -122,6 +129,17 @@ export class LikedPropertiesComponent implements OnInit {
         });
       }
     });
+
+    this.propertyService.getLikedApartments(this.idUser).toPromise().then((response) => {
+      if (response.success)
+        console.log("innn")
+        this.apartments = response.data;
+    })
+    console.log("innn")
+    this.router.navigate(['liked-properties'])
+    // $("#divToReload").load(location.href + " #divToReload");
+
+    // $("divToReload").relo()
   }
 
   public async toggleSelected(propertyId: number) {
@@ -136,6 +154,12 @@ export class LikedPropertiesComponent implements OnInit {
                 summary: 'Removed from liked',
                 detail: 'Removed from your favourites!'
               });
+              this.propertyService.getLikedApartments(this.idUser).toPromise().then((response) => {
+                if (response.success)
+                  this.apartments = response.data;
+              })
+              // location.reload()
+              this.router.navigate(['liked-properties'])
             }
           });
         }
@@ -151,8 +175,11 @@ export class LikedPropertiesComponent implements OnInit {
         return
       }
     }
+
+
     return this.selectedChange.emit(this.selected);
   }
+
 
   public async checkIfApartmentIsInFavourites(propertyId: number): Promise<boolean> {
     await this.propertyService.getLikedApartments(this.currentUser.idUser).toPromise().then(response => {

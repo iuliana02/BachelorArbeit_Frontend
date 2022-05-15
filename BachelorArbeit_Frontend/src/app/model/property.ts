@@ -23,4 +23,5 @@ export interface Property {
   parkingLotsAvailable: number;
   liked: boolean;
   imagesToShow: any[];
+  price: number;
 }

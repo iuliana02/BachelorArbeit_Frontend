@@ -1,7 +1,8 @@
 <!--<app-home></app-home>-->
 <p-toast position="bottom-center"></p-toast>
 
-<div class="card w-75 classCard" *ngFor="let apartment of this.apartments">
+<div *ngIf="!noLikedApartments">
+<div id="divToReload" class="card w-75 classCard" *ngFor="let apartment of this.apartments">
   <div class="card-body">
     <h5 class="card-title text-900">Apartment with {{apartment.nrOfRooms +' rooms, ' + apartment.divisionType + ', ' + apartment.area + ' mp2'}}</h5>
 
@@ -111,7 +112,9 @@
 
   </div>
 </div>
-<!--</div>-->
+</div>
 
-
+<div *ngIf="noLikedApartments">
+  Favourites list is currently empty!
+</div>
 

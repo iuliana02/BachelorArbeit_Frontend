@@ -8,6 +8,8 @@ import {MenuModule} from "primeng/menu";
 import {MegaMenuModule} from "primeng/megamenu";
 import {DividerModule} from "primeng/divider";
 import { NavigationToolbarTenantComponent } from './navigation-toolbar-tenant/navigation-toolbar-tenant.component';
+import {MatMenuModule} from "@angular/material/menu";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 @NgModule({
   declarations: [NavigationToolbarLandlordComponent, NavigationToolbarTenantComponent],
@@ -15,14 +17,16 @@ import { NavigationToolbarTenantComponent } from './navigation-toolbar-tenant/na
         NavigationToolbarLandlordComponent,
         NavigationToolbarTenantComponent
     ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    MenubarModule,
-    ButtonModule,
-    MenuModule,
-    MegaMenuModule,
-    DividerModule
-  ]
+    imports: [
+        CommonModule,
+        RouterModule,
+        MenubarModule,
+        ButtonModule,
+        MenuModule,
+        MegaMenuModule,
+        DividerModule,
+        MatMenuModule,
+        FontAwesomeModule
+    ]
 })
 export class NavigationModule { }

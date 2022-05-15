@@ -15,7 +15,8 @@ export class FirstPageComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(localStorage)
-    this.authService.logout()
+    localStorage.clear()
+    // this.authService.logout()
   }
 
 

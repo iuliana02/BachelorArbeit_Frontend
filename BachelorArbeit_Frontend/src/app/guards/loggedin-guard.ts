@@ -19,8 +19,10 @@ export class LoggedInGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    console.log("USERNAME: " + localStorage.getItem('username'));
-    if (localStorage.getItem('STATE') == 'true') {
+    if ((localStorage.getItem('firstName') !== 'null' && localStorage.getItem('lastName') !== 'null'
+        && localStorage.getItem('email') !== 'null' && localStorage.getItem('token') !== 'null') &&
+      (localStorage.getItem('firstName') !== null && localStorage.getItem('lastName') !== null
+        && localStorage.getItem('email') !== null && localStorage.getItem('token') !== null)) {
       return true;
     } else {
       return this.router.navigate(['login']);

@@ -42,12 +42,13 @@ export class ProfileComponent implements OnInit {
       }
     )
 
-    this.rentalRequestService.getNumberOfRentalRequests(this.user.idUser).subscribe(response => {
-        this.notifications = response.data;
-        console.log(response)
-      }
-    )
-
+    if (this.user.role == 'landlord') {
+      this.rentalRequestService.getNumberOfRentalRequests(this.user.idUser).subscribe(response => {
+          this.notifications = response.data;
+          console.log(response)
+        }
+      )
+    }
   };
 
   edit() {

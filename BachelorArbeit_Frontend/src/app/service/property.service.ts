@@ -113,7 +113,8 @@ export class PropertyService {
 
   predictPrice(apartment: Property) {
     const body = JSON.stringify(apartment);
-    return this.backendService.post(`${this.baseURL}/predict`, body);
+    return this.backendService.post(`http://localhost:4201/external/predict`, body);
   }
+
 
 }

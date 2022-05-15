@@ -81,4 +81,11 @@ export class UserService {
     return this.backendService.get(`${this.baseURL}/getUserById`, params)
   }
 
+  addTenantToLandlord(landlordId: number, tenantId:number) {
+    let params = new HttpParams();
+    params = params.append('landlordId', landlordId);
+    params = params.append('tenantId', tenantId);
+    return this.backendService.post(`${this.baseURL}/addTenantToLandlord`, null, params)
+  }
+
 }

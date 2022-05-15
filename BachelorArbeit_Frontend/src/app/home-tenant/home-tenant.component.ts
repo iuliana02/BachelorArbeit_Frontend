@@ -15,16 +15,16 @@ export class HomeTenantComponent implements OnInit {
     this.verticalMenu = [
       {
         label: 'Dashboard',
-        url:'home-tenant'
+        url:'properties-list'
       },
       {
         label: 'Profile',
         url:'profile'
       },
-      {
-        label: 'All apartments',
-        url: 'properties-list'
-      },
+      // {
+      //   label: 'All apartments',
+      //   url: 'properties-list'
+      // },
       {
         label: 'Liked apartments',
         url: 'liked-properties'

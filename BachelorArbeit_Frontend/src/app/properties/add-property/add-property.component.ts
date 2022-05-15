@@ -62,7 +62,8 @@ export class AddPropertyComponent implements OnInit {
       floor: new FormControl(),
       availableFrom: new FormControl(),
       parkingLotsAvailable: new FormControl(),
-      propertyImage: new FormControl()
+      propertyImage: new FormControl(),
+      price: new FormControl()
     })
     this.anyFieldEmpty = false;
   }
@@ -116,6 +117,10 @@ export class AddPropertyComponent implements OnInit {
     this.newProperty.availableFrom = this.newPropertyForm.controls['availableFrom'].value;
     this.newProperty.style = this.newPropertyForm.controls['style'].value;
     this.newProperty.parkingLotsAvailable = this.newPropertyForm.controls['parkingLotsAvailable'].value;
+    if (this.newPropertyForm.controls['price'].value != null)
+      this.newProperty.price = this.newPropertyForm.controls['price'].value;
+    else
+      this.newProperty.price = this.predictedPrice;
   }
 
   saveProperty() {
