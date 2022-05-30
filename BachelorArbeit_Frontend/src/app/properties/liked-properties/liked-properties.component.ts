@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Optional, Output} from '@angular/core';
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {PropertyService} from "../../service/property.service";
 import {User} from "../../model/user";
@@ -10,6 +10,7 @@ import {UserService} from "../../service/user.service";
 import {RentalRequest} from "../../model/rentalRequest";
 import { ChangeDetectorRef } from '@angular/core';
 import {Router} from "@angular/router";
+import {AppComponent} from "../../app.component";
 
 @Component({
   selector: 'app-liked-properties',
@@ -29,15 +30,16 @@ export class LikedPropertiesComponent implements OnInit {
   closeResults: any;
   rentalRequest: FormGroup;
   noLikedApartments: boolean;
+  // webSocketAPI: WebSocketAPI;
+
 
   @Input() selected: boolean = false;
   @Output() selectedChange = new EventEmitter<boolean>();
 
-  constructor(public propertyService: PropertyService, private modalService: NgbModal,
-              private messageService: MessageService, private sanitizer: DomSanitizer,
-              private userService: UserService, private router: Router) {
+  constructor(@Optional() public propertyService: PropertyService, @Optional() private modalService: NgbModal,
+              @Optional() private messageService: MessageService, @Optional() private sanitizer: DomSanitizer,
+              @Optional() private userService: UserService, @Optional() private router: Router) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-
   }
 
   async ngOnInit(): Promise<void> {
@@ -75,6 +77,9 @@ export class LikedPropertiesComponent implements OnInit {
     })
 
     console.log(this.currentUser)
+
+    // this.webSocketAPI = new WebSocketAPI(new LikedPropertiesComponent);
+
   }
 
   async getImages(idProperty: number): Promise<any[]> {
@@ -133,7 +138,7 @@ export class LikedPropertiesComponent implements OnInit {
     this.propertyService.getLikedApartments(this.idUser).toPromise().then((response) => {
       if (response.success)
         console.log("innn")
-        this.apartments = response.data;
+      this.apartments = response.data;
     })
     console.log("innn")
     this.router.navigate(['liked-properties'])
@@ -227,5 +232,24 @@ export class LikedPropertiesComponent implements OnInit {
         }
       }
     );
+    // this.sendMessage(rentalRequest)
   }
+
+
+  // //websocket
+  // connect() {
+  //   this.webSocketAPI._connect();
+  // }
+  //
+  // disconnect() {
+  //   this.webSocketAPI._disconnect();
+  // }
+  //
+  // sendMessage(rentalRequest: any) {
+  //   this.webSocketAPI._send(rentalRequest);
+  // }
+  //
+  // handleMessage(message: any) {
+  //   // this.greeting = message.body;
+  // }
 }

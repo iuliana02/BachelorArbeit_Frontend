@@ -21,11 +21,11 @@ export class AppComponent implements OnInit{
   }
 
   isLoggedInAsLandlord(): boolean {
-    return localStorage.getItem('email') !== null && localStorage.getItem('token') !== null && localStorage.getItem('role')=="landlord"
+    return localStorage.getItem('emailLogin') !== null && localStorage.getItem('token') !== null && localStorage.getItem('role')=="landlord"
   }
 
   isLoggedInAsTenant(): boolean {
-    return localStorage.getItem('email') !== null && localStorage.getItem('token') !== null && localStorage.getItem('role')=="tenant"
+    return localStorage.getItem('emailLogin') !== null && localStorage.getItem('token') !== null && localStorage.getItem('role')=="tenant"
   }
 
   isLoggedIn(): boolean {

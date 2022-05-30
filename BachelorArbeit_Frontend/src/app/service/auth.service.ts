@@ -37,9 +37,9 @@ export class AuthService {
   }
 
   isLoggedIn() {
-    if ((localStorage.getItem('email') !== 'null' && localStorage.getItem('token') !== 'null'
+    if ((localStorage.getItem('emailLogin') !== 'null' && localStorage.getItem('token') !== 'null'
         && localStorage.getItem('firstName') !== 'null' && localStorage.getItem('lastName') !== 'null') &&
-      (localStorage.getItem('email') !== null && localStorage.getItem('token') !== null
+      (localStorage.getItem('emailLogin') !== null && localStorage.getItem('token') !== null
         && localStorage.getItem('firstName') !== null && localStorage.getItem('lastName') !== null)) {
       return true;
     } else

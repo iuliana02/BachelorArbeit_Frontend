@@ -17,7 +17,7 @@ export class UserService {
     const options = {
       headers: {
         'Authorization': localStorage.getItem('token'),
-        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Origin': 'http://localhost:4201',
         'Access-Control-Allow-Credentials': 'true',
         'Content-Type': 'application/json'
       }
@@ -42,24 +42,24 @@ export class UserService {
     let params = new HttpParams();
     params = params.append('firstName', firstName);
     params = params.append('lastName', lastName);
-    params = params.append('email', email);
+    params = params.append('username', email);
     params = params.append('password', password);
     params = params.append('role', role);
     return this.backendService.post(`${this.baseURL}/register`, null, params);
   }
 
   login(emailLogin: string, passwordLogin: string) {
-    // let headers = new Headers();
-    // headers.append('Content-Type', 'application/json');
-    // headers.append('Accept', 'application/json');
-    // headers.append('Origin','http://localhost:4201/user/login');
-    // headers.append ('Access-Control-Allow-Origin', '*');
-    // headers.append( 'Access-Control-Allow-Credentials', 'true');
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+    headers.append('Origin','http://localhost:4201');
+    headers.append ('Access-Control-Allow-Origin', '*');
+    headers.append( 'Access-Control-Allow-Credentials', 'true');
 
     let params = new HttpParams();
-    params = params.append('emailLogin', emailLogin);
-    params = params.append('passwordLogin', passwordLogin);
-    return this.backendService.post(`${this.baseURL}/login`, null, params);
+    params = params.append('username', emailLogin);
+    params = params.append('password', passwordLogin);
+    return this.backendService.post(`${this.baseURL}/login`,null, params);
   }
 
   updateUser(user:User): Observable<any> {
@@ -86,6 +86,12 @@ export class UserService {
     params = params.append('landlordId', landlordId);
     params = params.append('tenantId', tenantId);
     return this.backendService.post(`${this.baseURL}/addTenantToLandlord`, null, params)
+  }
+
+  getAcceptedTenantsForLandlord(landlordId: number) {
+    let params = new HttpParams();
+    params = params.append('landlordId', landlordId);
+    return this.backendService.get(`${this.baseURL}/getAcceptedTenantsForLandlord`, params)
   }
 
 }

@@ -1,6 +1,7 @@
 <!--<app-authentication></app-authentication>-->
+<app-first-page-navigation *ngIf="!isLoggedIn()"></app-first-page-navigation>
+
 <app-navigation-toolbar-landlord *ngIf="isLoggedIn() && isLoggedInAsLandlord() && !sharedService.justProfilePage"></app-navigation-toolbar-landlord>
 <app-navigation-toolbar-tenant *ngIf="isLoggedIn() && isLoggedInAsTenant() && !sharedService.justProfilePage"></app-navigation-toolbar-tenant>
 
-<app-first-page-navigation *ngIf="!isLoggedIn()"></app-first-page-navigation>
 <router-outlet></router-outlet>

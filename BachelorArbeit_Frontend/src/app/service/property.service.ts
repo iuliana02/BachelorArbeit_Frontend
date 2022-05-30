@@ -21,7 +21,7 @@ export class PropertyService {
     const options = {
       headers: {
         'Authorization': localStorage.getItem('token'),
-        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Origin': 'http://localhost:4201',
         'Access-Control-Allow-Credentials': 'true',
         'Content-Type': 'application/json'
       }
@@ -37,7 +37,7 @@ export class PropertyService {
         'Authorization': localStorage.getItem('token'),
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Credentials': 'true',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json; multipart/form-data'
       }
     };
     const body = JSON.stringify(property);
@@ -113,8 +113,13 @@ export class PropertyService {
 
   predictPrice(apartment: Property) {
     const body = JSON.stringify(apartment);
+    console.log("body")
+    console.log(body)
     return this.backendService.post(`http://localhost:4201/external/predict`, body);
   }
 
+  getPropertyWithMostLikes(){
+    return this.backendService.get(`${this.baseURL}/getPropertyWithMostLikes`)
+  }
 
 }

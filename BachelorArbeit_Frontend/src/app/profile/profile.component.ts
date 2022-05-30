@@ -15,7 +15,7 @@ import {RentalRequestService} from "../service/rental-request.service";
 })
 export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
-  user: User = {} as User;
+  user: any = {} as User;
   users!: User[];
   role: String = '';
   notEditingProfile = true;
@@ -36,14 +36,14 @@ export class ProfileComponent implements OnInit {
     this.profileForm = new FormGroup({
         firstName: new FormControl({value:this.user.firstName, disabled:this.notEditingProfile}),
         lastName: new FormControl({value:this.user.lastName, disabled:this.notEditingProfile}),
-        email: new FormControl({value:this.user.email, disabled:this.notEditingProfile}),
+        username: new FormControl({value:this.user.username, disabled:this.notEditingProfile}),
         phoneNumber: new FormControl({value:this.user.mobileNumber, disabled:this.notEditingProfile}),
         birthDay: new FormControl({value:this.user.birthDay, disabled:this.notEditingProfile})
       }
     )
 
     if (this.user.role == 'landlord') {
-      this.rentalRequestService.getNumberOfRentalRequests(this.user.idUser).subscribe(response => {
+      this.rentalRequestService.getNumberOfRentalRequests(this.user.userId).subscribe(response => {
           this.notifications = response.data;
           console.log(response)
         }
@@ -54,7 +54,7 @@ export class ProfileComponent implements OnInit {
   edit() {
     this.profileForm.controls['firstName'].enable();
     this.profileForm.controls['lastName'].enable();
-    this.profileForm.controls['email'].enable();
+    this.profileForm.controls['username'].enable();
     this.profileForm.controls['phoneNumber'].enable();
     this.profileForm.controls['birthDay'].enable();
   }
@@ -63,10 +63,11 @@ export class ProfileComponent implements OnInit {
     await this.userService.getAllUsers().toPromise().then((data) =>{
       if (data.success){
         this.users = data.data;
+        console.log(this.users)
       }
     })
-    // @ts-ignore
-    this.user = this.users.find((x) => x.email === localStorage.getItem("email"));
+    this.user = this.users.find((x) => x.username === localStorage.getItem("emailLogin"));
+    console.log("hereee")
     console.log(this.user)
 
   }
@@ -75,7 +76,7 @@ export class ProfileComponent implements OnInit {
     let copyUser = Object.assign({}, this.user)
     copyUser.firstName = this.profileForm.controls['firstName'].value;
     copyUser.lastName = this.profileForm.controls['lastName'].value;
-    copyUser.email = this.profileForm.controls['email'].value;
+    copyUser.username = this.profileForm.controls['username'].value;
     copyUser.mobileNumber = this.profileForm.controls['phoneNumber'].value;
     copyUser.birthDay = this.profileForm.controls['birthDay'].value;
 
@@ -99,7 +100,7 @@ export class ProfileComponent implements OnInit {
   disableInputs() {
     this.profileForm.controls['firstName'].disable();
     this.profileForm.controls['lastName'].disable();
-    this.profileForm.controls['email'].disable();
+    this.profileForm.controls['username'].disable();
     this.profileForm.controls['phoneNumber'].disable();
     this.profileForm.controls['birthDay'].disable();
   }

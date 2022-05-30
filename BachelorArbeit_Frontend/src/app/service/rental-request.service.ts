@@ -23,7 +23,19 @@ export class RentalRequestService {
     return this.backendService.get(`${this.baseURL}/getRequestsForLandlord`, params)
   }
 
-  public removeRentalrequest(propertyId: number) {
+  public getEvaluatedRentalRequestsForLandlord(idLandlord: number):Observable<any> {
+    let params = new HttpParams();
+    params = params.append('idUser', idLandlord);
+    return this.backendService.get(`${this.baseURL}/getEvaluatedRentalRequestsForLandlord`, params)
+  }
+
+  public getNonevaluatedRentalRequestsForLandlord(idLandlord: number):Observable<any> {
+    let params = new HttpParams();
+    params = params.append('idUser', idLandlord);
+    return this.backendService.get(`${this.baseURL}/getNonevaluatedRequestsForLandlord`, params)
+  }
+
+  public async removeRentalrequest(propertyId: number) {
     let params = new HttpParams();
     params = params.append('propertyId', propertyId);
     return this.backendService.post(`${this.baseURL}/deleteRequestByPropertyId`,null, params)

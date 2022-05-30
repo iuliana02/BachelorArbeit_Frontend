@@ -1,1 +1,71 @@
 <p-megaMenu [model]="verticalMenu" orientation="vertical"></p-megaMenu>
+
+
+<div style="margin-left: 200px;">
+  <p>
+  <h2> Daily statistics for {{formatCurrentDate}}</h2>
+  <table>
+    <tr>
+      <td style="min-width: 300px">
+        <app-bar-charts></app-bar-charts>
+      </td>
+      <td style="min-width: 300px">
+        <app-divisiontype-pie-chart></app-divisiontype-pie-chart>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<!--<app-properties-list-landlord></app-properties-list-landlord>-->
+
+<br><br>
+<div style="margin-left: 200px;">
+  <p>
+  <h2> Most liked apartment:  {{this.mostLikedApartment.nrOfLikes}}</h2>
+</div>
+<div class="card w-75 classCard">
+  <div class="card-body">
+    <p-tag styleClass="p-mr-2" class="position-relative top-1 start-50 badge"
+           severity="warning"> Posted on: {{this.mostLikedApartment.postDate}}
+    </p-tag>
+    <p-tag styleClass="p-mr-2" class="position-relative top-1 start-50 badge" style="margin-left: 480px"
+           severity="warning"> #{{this.mostLikedApartment.idProperty}}
+    </p-tag>
+    <h5 class="card-title text-900">Apartment
+      with {{this.mostLikedApartment.nrOfRooms + ' rooms, ' + this.mostLikedApartment.divisionType + ', ' + this.mostLikedApartment.area + ' mp2'}}</h5>
+
+    <ul>
+      <li class="flex py-2">
+        <div class="text-600 font-medium">
+          <mat-icon> place</mat-icon>
+        </div>
+        <div class="text-900 md:w-4 md:flex-order-1 flex-order-1"
+             style="padding-left: 10px">{{this.mostLikedApartment.land}}, {{this.mostLikedApartment.city}}
+          , {{this.mostLikedApartment.street}}, {{this.mostLikedApartment.nr}}</div>
+      </li>
+      <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap" style="align-items: center">
+        <div class="text-600 font-medium">
+          <mat-icon> settings_overscan</mat-icon>
+        </div>
+        <div class="text-900" style="padding-left: 10px">{{this.mostLikedApartment.area}} mp2</div>
+        <div class="text-600 font-medium" style="padding-left: 20px">
+          <mat-icon>style</mat-icon>
+        </div>
+        <div class="text-900" style="padding-left: 10px">{{this.mostLikedApartment.style}}</div>
+        <div class="text-600 font-medium" style="padding-left: 20px">
+          <mat-icon> vpn_key</mat-icon>
+        </div>
+        <div class="text-900" style="padding-left: 10px">{{this.mostLikedApartment.nrOfRooms}} rooms</div>
+      </li>
+
+      <li class="flex align-items-center py-3 px-2 border-top-1 border-bottom-1 surface-border flex-wrap">
+        <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1 line-height-3">
+          {{this.mostLikedApartment.description}}</div>
+      </li>
+    </ul>
+
+    <div *ngFor="let img of this.mostLikedApartment.imagesToShow" class="flex-container" style="padding-left: 40px">
+      <p-image [src]='img' width="200px" [preview]="true"></p-image>
+    </div>
+  </div>
+</div>

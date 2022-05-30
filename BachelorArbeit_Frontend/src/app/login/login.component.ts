@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('idUser', response.data.userId);
         localStorage.setItem('firstName', response.data.firstName);
         localStorage.setItem('lastName', response.data.lastName);
-        localStorage.setItem('email', this.loginForm.controls['emailLogin'].value);
+        localStorage.setItem('emailLogin', this.loginForm.controls['emailLogin'].value);
         localStorage.setItem('passwordLogin', this.loginForm.controls['passwordLogin'].value);
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('phoneNumber', response.data.mobileNumber);
@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit {
         console.log(localStorage)
 
         // this.authService.login(response.data.role)
+        console.log(localStorage.getItem("emailLogin"));
         this.messageService.add({severity: 'success', summary: 'Login successful', detail: 'null'});
         if (response.data.role == "landlord")
           this.router.navigate(['home-landlord']);

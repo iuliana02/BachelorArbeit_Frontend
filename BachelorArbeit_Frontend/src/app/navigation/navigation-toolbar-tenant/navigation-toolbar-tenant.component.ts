@@ -23,7 +23,7 @@ export class NavigationToolbarTenantComponent implements OnInit {
   async ngOnInit() {
     this.idUser = localStorage.getItem("idUser")
     console.log(this.idUser)
-    await this.notificationService.getNotificationsForUser(70).toPromise().then((resp: any) =>
+    await this.notificationService.getNotificationsForUser().toPromise().then((resp: any) =>
     {
       if (resp.success) {
         this.notificationsFromResponse = resp.data;
@@ -31,11 +31,16 @@ export class NavigationToolbarTenantComponent implements OnInit {
     })
     console.log(this.notificationsFromResponse.length)
     console.log(this.notificationsFromResponse[0].type)
-    for (let n of this.notificationsFromResponse){
-      var s: string ="";
-      if (n.type == "WELCOME_NEW_USER")
-        s = "Welcome to Estatesy, " + n.message.data.firstName + " " + n.message.data.lastName +"!"
-      let notif =  {type:n.type, object: n.message, date: formatDate(n.date, 'dd-MM-yyyy', 'en-US'), message: s}
+    for (let n of this.notificationsFromResponse) {
+      var s: string = "";
+      let notif: any;
+      if (n.type == "WELCOME_NEW_USER") {
+        s = "Welcome to Estatesy, " + n.message.data.firstName + " " + n.message.data.lastName + "!"
+        notif = {type: n.type, object: n.message, date: formatDate(n.date, 'dd-MM-yyyy', 'en-US'), message: s}
+      }
+      else if (n.type == "ACCEPTED_REQUEST"){
+        notif = {type: n.type, object: n.message, date: formatDate(n.date, 'dd-MM-yyyy', 'en-US'), message: n.message}
+      }
       this.notifications.push(notif)
     }
     // if (this.notificationsFromResponse.length==0)

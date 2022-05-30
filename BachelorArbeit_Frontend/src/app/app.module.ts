@@ -6,7 +6,7 @@ import {ButtonModule} from "primeng/button";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {RouterModule} from "@angular/router";
 import {AppRoutingModule, routingComponents} from "./app-routing.module";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {MessageService} from "primeng/api";
 import {InputTextModule} from "primeng/inputtext";
 import {ToastModule} from "primeng/toast";
@@ -49,64 +49,79 @@ import { PropertiesListLandlordComponent } from './properties/properties-list-la
 import {GalleriaModule} from "primeng/galleria";
 import {LoggedInGuard} from "./guards/loggedin-guard";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {AuthInterceptor} from "./backend/AuthInterceptor";
+import { BarChartsComponent } from './statistics/bar-charts/bar-charts.component';
+import {NgxChartsModule} from "@swimlane/ngx-charts";
+import { DivisiontypePieChartComponent } from './statistics/divisiontype-pie-chart/divisiontype-pie-chart.component';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    routingComponents,
-    ProfileComponent,
-    PropertiesListComponent,
-    AddPropertyComponent,
-    TenantsListComponent,
-    HomeTenantComponent,
-    LikedPropertiesComponent,
-    RentalRequestComponent,
-    FirstPageComponent,
-    LoginComponent,
-    SignupComponent,
-    FirstPageNavigationComponent,
-    PropertiesListLandlordComponent
-  ],
-    imports: [
-        CommonModule,
-        BrowserAnimationsModule,
-        BrowserModule,
-        ButtonModule,
-        InputTextModule,
-        ReactiveFormsModule,
-        RouterModule,
-        AppRoutingModule,
-        HttpClientModule,
-        ToastModule,
-        SidebarModule,
-        MenubarModule,
-        BadgeModule,
-        AccordionModule,
-        CardModule,
-        PanelModule,
-        MegaMenuModule,
-        FormsModule,
-        HomeModule,
-        NavigationModule,
-        DividerModule,
-        InputMaskModule,
-        FileUploadModule,
-        TagModule,
-        ImageModule,
-        HomeModule,
-        NgbModule,
-        MatIconModule,
-        MatButtonModule,
-        ScrollPanelModule,
-        TabMenuModule,
-        RippleModule,
-        ChipModule,
-        MatProgressSpinnerModule,
-        GalleriaModule,
-        FontAwesomeModule
+    declarations: [
+        AppComponent,
+        routingComponents,
+        ProfileComponent,
+        PropertiesListComponent,
+        AddPropertyComponent,
+        TenantsListComponent,
+        HomeTenantComponent,
+        LikedPropertiesComponent,
+        RentalRequestComponent,
+        FirstPageComponent,
+        LoginComponent,
+        SignupComponent,
+        FirstPageNavigationComponent,
+        PropertiesListLandlordComponent,
+        BarChartsComponent,
+        DivisiontypePieChartComponent
     ],
-  providers: [MessageService, LoggedInGuard],
-  bootstrap: [AppComponent]
+  imports: [
+    CommonModule,
+    BrowserAnimationsModule,
+    BrowserModule,
+    ButtonModule,
+    InputTextModule,
+    ReactiveFormsModule,
+    RouterModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ToastModule,
+    SidebarModule,
+    MenubarModule,
+    BadgeModule,
+    AccordionModule,
+    CardModule,
+    PanelModule,
+    MegaMenuModule,
+    FormsModule,
+    // HomeModule,
+    NavigationModule,
+    DividerModule,
+    InputMaskModule,
+    FileUploadModule,
+    TagModule,
+    ImageModule,
+    // HomeModule,
+    NgbModule,
+    MatIconModule,
+    MatButtonModule,
+    ScrollPanelModule,
+    TabMenuModule,
+    RippleModule,
+    ChipModule,
+    MatProgressSpinnerModule,
+    GalleriaModule,
+    FontAwesomeModule,
+    NgxChartsModule
+  ],
+    providers: [MessageService, LoggedInGuard,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true
+        }],
+  exports: [
+    PropertiesListLandlordComponent, PropertiesListComponent, BarChartsComponent, DivisiontypePieChartComponent
+  ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

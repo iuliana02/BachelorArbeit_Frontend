@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {MegaMenuItem, MenuItem} from "primeng/api";
+import { DatePipe } from '@angular/common';
+import {PropertyService} from "../../service/property.service";
+import {DomSanitizer} from "@angular/platform-browser";
+import {Property} from "../../model/property";
 
 @Component({
   selector: 'app-home',
@@ -9,10 +13,17 @@ import {MegaMenuItem, MenuItem} from "primeng/api";
 })
 export class HomeComponent implements OnInit {
   verticalMenu!: MegaMenuItem[];
+  currentDate: Date = new Date();
+  formatCurrentDate: string | null;
+  mostLikedApartment: Property;
+  retrieveResponse: any;
+  retrievedImage: any;
+  base64Data: any;
+  imageIdList : any[] = [];
 
-  constructor(public router: Router) { }
+  constructor(public router: Router, private propertyService: PropertyService, private sanitizer: DomSanitizer) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     console.log(localStorage)
     if (localStorage.getItem('email') == 'null') {
       this.logout();
@@ -22,18 +33,18 @@ export class HomeComponent implements OnInit {
     this.verticalMenu = [
       {
         label: 'Dashboard',
-        url:'home-landlord'
+        url: 'home-landlord'
       },
       {
         label: 'Profile',
-        url:'profile'
+        url: 'profile'
       },
       {
         label: 'My properties',
-          url: 'properties-list-landlord'
+        url: 'properties-list-landlord'
         // items:[]
-          // {label: 'Rented apartments', url: 'properties-list'} as MenuItem,
-          // {label: "Not rented apartments", url: 'properties-list'}] as MenuItem
+        // {label: 'Rented apartments', url: 'properties-list'} as MenuItem,
+        // {label: "Not rented apartments", url: 'properties-list'}] as MenuItem
       },
       {
         label: 'My tenants',
@@ -44,6 +55,14 @@ export class HomeComponent implements OnInit {
         url: 'rental-request'
       }
     ]
+    const datepipe: DatePipe = new DatePipe('en-US')
+    this.formatCurrentDate = datepipe.transform(this.currentDate, 'dd-MMM-YYYY')
+
+    this.propertyService.getPropertyWithMostLikes().subscribe(res => {
+      this.mostLikedApartment = res.data;
+    })
+
+    this.mostLikedApartment.imagesToShow = await this.getImages(this.mostLikedApartment.idProperty)
   }
 
   logout() {
@@ -59,4 +78,21 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['login'])
   }
 
+  async getImages(idProperty: number): Promise<any[]> {
+    await this.propertyService.getPhotoIds(idProperty).toPromise().then((res) => {
+      this.imageIdList = res.data
+    })
+    console.log("idList" + this.imageIdList)
+    let imagesToShow : any[] = []
+    for (let imgId of this.imageIdList) {
+      this.propertyService.getImage(imgId).subscribe((res: any) => {
+          this.retrieveResponse = res.picByte;
+          // console.log(this.retrieveResponse)
+          this.retrievedImage = 'data:image/jpeg;base64,' + this.retrieveResponse;
+          imagesToShow.push(this.sanitizer.bypassSecurityTrustUrl(this.retrievedImage));
+        }
+      );
+    }
+    return imagesToShow;
+  }
 }

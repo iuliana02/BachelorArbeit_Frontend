@@ -56,7 +56,7 @@ export class PropertiesListLandlordComponent implements OnInit {
     for (let imgId of this.imageIdList) {
       this.propertyService.getImage(imgId).subscribe((res: any) => {
           this.retrieveResponse = res.picByte;
-          console.log(this.retrieveResponse)
+          // console.log(this.retrieveResponse)
           this.retrievedImage = 'data:image/jpeg;base64,' + this.retrieveResponse;
           imagesToShow.push(this.sanitizer.bypassSecurityTrustUrl(this.retrievedImage));
         }

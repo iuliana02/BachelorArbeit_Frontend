@@ -14,8 +14,8 @@ export class FirstPageNavigationComponent implements OnInit {
   ngOnInit(): void {
     this.items = [
       {label: 'ESTATESY', url: 'first-page'},
-      {label: 'Landlords', icon: 'pi pi-fw pi-calendar'},
-      {label: 'Tenants', icon: 'pi pi-fw pi-pencil'},
+      {label: 'Landlords', icon: 'pi pi-fw pi-calendar', disabled:true},
+      {label: 'Tenants', icon: 'pi pi-fw pi-pencil', disabled:true},
       {label: 'Login', icon: 'pi pi-fw pi-cog', url: 'login'},
       {label: 'Signup', icon: 'pi pi-fw pi-cog', url: 'signup'}
     ];

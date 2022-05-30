@@ -1,11 +1,13 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, FormControlName} from "@angular/forms";
 import {Router} from "@angular/router";
 import {Property} from "../../model/property";
 import {PropertyService} from "../../service/property.service";
 import {MessageService} from "primeng/api";
 import {InputTextModule} from 'primeng/inputtext';
 import {HttpClient} from "@angular/common/http";
+import {BackendService} from "../../backend/backend.service";
+
 
 @Component({
   selector: 'app-add-property',
@@ -13,7 +15,7 @@ import {HttpClient} from "@angular/common/http";
   styleUrls: ['./add-property.component.css']
 })
 export class AddPropertyComponent implements OnInit {
-      newPropertyForm!: FormGroup;
+  newPropertyForm!: FormGroup;
   property = {} as Property;
   uploadedFiles: File[] = [];
   // currentFileUpload : FileList = {} as File;
@@ -29,6 +31,7 @@ export class AddPropertyComponent implements OnInit {
   emptyNrBathrooms: boolean = false;
   emptyFloor: boolean = false;
   emptyAvailableFrom: boolean = false;
+  emptyNrOfBalconies: boolean = false;
   emptyStyle: boolean = false;
   emptyParking: boolean = false;
   message!: string;
@@ -61,6 +64,7 @@ export class AddPropertyComponent implements OnInit {
       nrOfBathrooms: new FormControl(),
       floor: new FormControl(),
       availableFrom: new FormControl(),
+      nrOfBalconies: new FormControl(),
       parkingLotsAvailable: new FormControl(),
       propertyImage: new FormControl(),
       price: new FormControl()
@@ -69,26 +73,26 @@ export class AddPropertyComponent implements OnInit {
   }
 
   // selectFile(event: any) {
-    // const file = event.target.files.item(0);
-    //
-    // if (file.type.match('image.*')) {
-    //   var size = event.target.files[0].size;
-    //   if(size > 1000000)
-    //   {
-    //     alert("size must not exceeds 1 MB");
-    //     // @ts-ignore
-    //     this.newPropertyForm.get('propertyImage').setValue("");
-    //   }
-    //   else
-    //   {
-    //     this.selectedFiles = event.target;
+  // const file = event.target.files.item(0);
+  //
+  // if (file.type.match('image.*')) {
+  //   var size = event.target.files[0].size;
+  //   if(size > 1000000)
+  //   {
+  //     alert("size must not exceeds 1 MB");
+  //     // @ts-ignore
+  //     this.newPropertyForm.get('propertyImage').setValue("");
+  //   }
+  //   else
+  //   {
+  //     this.selectedFiles = event.target;
 
-    //   }
-    // } else {
-    //   alert('invalid format!');
-    // }
+  //   }
+  // } else {
+  //   alert('invalid format!');
+  // }
 
-    // console.log(this.selectedFiles)
+  // console.log(this.selectedFiles)
   // }
 
   onUpload(event:any) {
@@ -115,6 +119,7 @@ export class AddPropertyComponent implements OnInit {
     this.newProperty.nrOfBathrooms = this.newPropertyForm.controls['nrOfBathrooms'].value;
     this.newProperty.floor = this.newPropertyForm.controls['floor'].value;
     this.newProperty.availableFrom = this.newPropertyForm.controls['availableFrom'].value;
+    this.newProperty.nrOfBalconies = this.newPropertyForm.controls['nrOfBalconies'].value;
     this.newProperty.style = this.newPropertyForm.controls['style'].value;
     this.newProperty.parkingLotsAvailable = this.newPropertyForm.controls['parkingLotsAvailable'].value;
     if (this.newPropertyForm.controls['price'].value != null)
@@ -157,15 +162,19 @@ export class AddPropertyComponent implements OnInit {
     const uploadImageData = new FormData();
     uploadImageData.append('imageFile', event, event.name);
     //Make a call to the Spring Boot Application to save the image
-    this.http.post('http://localhost:4201/property/upload', uploadImageData, { observe: 'response' })
-      .subscribe((response) => {
-        if (response.status === 200) {
-          this.message = 'Image uploaded successfully';
-        } else {
-          this.message = 'Image not uploaded successfully';
+    // let headers = new Headers();
+    // headers.append('Content-Type', 'multipart/form-data');
+    // headers.append('Accept', 'multipart/form-data');
+    console.log("hei")
+    this.http.post('http://localhost:4201/property/upload', uploadImageData)
+      .subscribe((response: any) => {
+          if (response.status === 200) {
+            this.message = 'Image uploaded successfully';
+          } else {
+            this.message = 'Image not uploaded successfully';
+          }
         }
-      }
-  );
+      );
   }
 
   validateFields() {
@@ -212,6 +221,10 @@ export class AddPropertyComponent implements OnInit {
     }
     if (this.newProperty.availableFrom == null) {
       this.emptyAvailableFrom = true;
+      this.anyFieldEmpty = true;
+    }
+    if (this.newProperty.nrOfBalconies == null) {
+      this.emptyNrOfBalconies = true;
       this.anyFieldEmpty = true;
     }
     if (this.newProperty.style == null) {

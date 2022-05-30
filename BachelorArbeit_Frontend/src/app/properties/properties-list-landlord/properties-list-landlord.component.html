@@ -3,10 +3,10 @@
 
 <div class="card w-75 classCard" *ngFor="let apartment of this.apartments">
   <div class="card-body">
-    <p-tag styleClass="p-mr-2"  class="position-absolute top-1 start-50 badge"
+    <p-tag styleClass="p-mr-2"  class="position-relative top-1 start-50 badge"
            severity="warning"> Posted on: {{apartment.postDate}}
     </p-tag>
-    <p-tag styleClass="p-mr-2"  class="position-absolute top-1 start-50 badge" style="margin-left: 480px"
+    <p-tag styleClass="p-mr-2"  class="position-relative top-1 start-50 badge" style="margin-left: 480px"
            severity="warning"> #{{apartment.idProperty}}
     </p-tag>
     <h5 class="card-title text-900">Apartment with {{apartment.nrOfRooms +' rooms, ' + apartment.divisionType + ', ' + apartment.area + ' mp2'}}</h5>

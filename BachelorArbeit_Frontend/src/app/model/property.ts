@@ -20,8 +20,10 @@ export interface Property {
   divisionType: string;
   style: string;
   availableFrom: Date;
+  nrOfBalconies: number;
   parkingLotsAvailable: number;
   liked: boolean;
   imagesToShow: any[];
   price: number;
+  nrOfLikes: number;
 }
