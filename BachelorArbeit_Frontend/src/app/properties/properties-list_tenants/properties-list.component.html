@@ -63,16 +63,6 @@
     <div *ngFor="let img of apartment.imagesToShow" class="flex-container" style="padding-left: 40px">
       <p-image [src]='img' width="200px" [preview]="true"></p-image>
     </div>
-    <!--    <p-galleria [value]="this.imagesToShow" [responsiveOptions]="responsiveOptions" [containerStyle]="{'max-width': '640px'}" [numVisible]="5">-->
-    <!--      <ng-template pTemplate="item" let-item>-->
-    <!--        <img [src]="item" style="width: 100%;" />-->
-    <!--      </ng-template>-->
-    <!--      <ng-template pTemplate="thumbnail" let-item>-->
-    <!--        <div class="grid grid-nogutter justify-content-center">-->
-    <!--          <img [src]="item" />-->
-    <!--        </div>-->
-    <!--      </ng-template>-->
-    <!--    </p-galleria>-->
 
     <div class="container">
     <div class="container2" style="padding-top: 20px">
@@ -121,6 +111,7 @@
         </form>
       </div>
       <div class="modal-footer">
+        <p> We will evaluate your answers and try to schedule an appointment for clarifications/ more details as soon as possible! </p>
         <button type="button" class="btn btn-outline-dark" (click)="sendRentalRequest(apartment)">Send</button>
       </div>
     </ng-template>

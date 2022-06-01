@@ -7,6 +7,7 @@ import { faBell } from '@fortawesome/free-solid-svg-icons';
 import * as $ from "jquery";
 import format from "@popperjs/core/lib/utils/format";
 import {formatDate} from "@angular/common";
+import {UserService} from "../../service/user.service";
 
 @Component({
   selector: 'app-navigation-toolbar-tenant',
@@ -18,7 +19,8 @@ export class NavigationToolbarTenantComponent implements OnInit {
   idUser: any;
   notificationsFromResponse: any[];
   showNotifications: boolean = false;
-  constructor(private router : Router, private  notificationService: NotificationService) { }
+  constructor(private router : Router, private  notificationService: NotificationService,
+              private userService: UserService) { }
 
   async ngOnInit() {
     this.idUser = localStorage.getItem("idUser")
@@ -58,8 +60,7 @@ export class NavigationToolbarTenantComponent implements OnInit {
   }
 
   logout() {
-    // @ts-ignore
-    // localStorage.setItem('username', null);
+    this.userService.logout(String(localStorage.getItem("email")))
     // @ts-ignore
     localStorage.setItem('email', null);
     // @ts-ignore

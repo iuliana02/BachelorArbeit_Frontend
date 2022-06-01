@@ -53,6 +53,8 @@ import {AuthInterceptor} from "./backend/AuthInterceptor";
 import { BarChartsComponent } from './statistics/bar-charts/bar-charts.component';
 import {NgxChartsModule} from "@swimlane/ngx-charts";
 import { DivisiontypePieChartComponent } from './statistics/divisiontype-pie-chart/divisiontype-pie-chart.component';
+import {DialogModule} from "primeng/dialog";
+import {CalendarModule} from "primeng/calendar";
 
 
 @NgModule({
@@ -111,7 +113,9 @@ import { DivisiontypePieChartComponent } from './statistics/divisiontype-pie-cha
     MatProgressSpinnerModule,
     GalleriaModule,
     FontAwesomeModule,
-    NgxChartsModule
+    NgxChartsModule,
+    DialogModule,
+    CalendarModule
   ],
     providers: [MessageService, LoggedInGuard,
         {

@@ -3,6 +3,7 @@ import {BackendService} from "../backend/backend.service";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {User} from "../model/user";
+import {DatePipe} from "@angular/common";
 
 @Injectable({
   providedIn: 'root'
@@ -62,6 +63,12 @@ export class UserService {
     return this.backendService.post(`${this.baseURL}/login`,null, params);
   }
 
+  logout(emailLogin: string) {
+    let params = new HttpParams();
+    params = params.append('username', emailLogin);
+    return this.backendService.post(`${this.baseURL}/logout`,null, params);
+  }
+
   updateUser(user:User): Observable<any> {
     const options = {
       headers: {
@@ -81,11 +88,15 @@ export class UserService {
     return this.backendService.get(`${this.baseURL}/getUserById`, params)
   }
 
-  addTenantToLandlord(landlordId: number, tenantId:number) {
+  evaluateTenantRequest(landlordId: number, tenantId: number, idRequest: number, appointmentDate: Date) {
     let params = new HttpParams();
     params = params.append('landlordId', landlordId);
     params = params.append('tenantId', tenantId);
-    return this.backendService.post(`${this.baseURL}/addTenantToLandlord`, null, params)
+    params = params.append('idRequest', idRequest);
+    const datepipe: DatePipe = new DatePipe('en-US')
+    let formattedDate = datepipe.transform(appointmentDate, 'YYYY-MM-dd HH:mm:ss')
+    params = params.append('appointmentDate', String(formattedDate));
+    return this.backendService.post(`${this.baseURL}/evaluateTenantRequest`, null, params)
   }
 
   getAcceptedTenantsForLandlord(landlordId: number) {

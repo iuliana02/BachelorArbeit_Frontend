@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {BackendService} from "../backend/backend.service";
 import {Observable} from "rxjs";
 import {HttpClient, HttpParams} from "@angular/common/http";
+import {DatePipe} from "@angular/common";
 
 @Injectable({
   providedIn: 'root'
@@ -39,5 +40,15 @@ export class RentalRequestService {
     let params = new HttpParams();
     params = params.append('propertyId', propertyId);
     return this.backendService.post(`${this.baseURL}/deleteRequestByPropertyId`,null, params)
+  }
+
+  public setAppointmentDate(requestId: number, appointmentDate: Date) {
+    let params = new HttpParams();
+    params = params.append('requestId', requestId);
+    const datepipe: DatePipe = new DatePipe('en-US')
+    let formattedDate = datepipe.transform(appointmentDate, 'YYYY-MM-dd HH:mm:ss')
+    params = params.append('appointmentDate', String(formattedDate));
+    return this.backendService.post(`${this.baseURL}/setAppointmentDate`,null, params)
+
   }
 }

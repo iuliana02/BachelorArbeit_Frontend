@@ -28,6 +28,14 @@ export class HomeTenantComponent implements OnInit {
       {
         label: 'Liked apartments',
         url: 'liked-properties'
+      },
+      {
+        label: '', disabled : true
+      }, {
+        label: '', disabled : true
+      },
+      {
+        label: 'My apartment',
       }
       ]
   }

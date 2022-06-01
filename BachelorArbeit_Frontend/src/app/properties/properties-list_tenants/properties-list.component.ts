@@ -17,6 +17,7 @@ import {AppComponent} from "../../app.component";
 
 
 @Component({
+  selector: 'app-properties-list-tenant',
   templateUrl: './properties-list.component.html',
   styleUrls: ['./properties-list.component.css']
 })

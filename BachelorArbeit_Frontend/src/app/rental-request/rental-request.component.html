@@ -24,11 +24,30 @@
     <label for="question3">For how much time do you plan to rent the apartment?</label>
     <input type="text" id="question3" class="form-control" placeholder={{request.question3}}>
   </fieldset>
-<!--        <div class="centered">-->
-        <button pButton pRipple label="Approve" icon="pi pi-check" class="p-button-success" style="max-width: 100px;" (click)="approveRequest(request.idLandlord, request.idTenant, request.idProperty)"></button>
-        <button pButton pRipple type="button" label="Reject" class="p-button-raised p-button-danger" style="max-width: 100px"></button>
-<!--        </div>-->
+
+<!--&lt;!&ndash;        <div class="centered">&ndash;&gt;-->
+<!--        <button pButton pRipple label="Approve" icon="pi pi-check" class="p-button-success" style="max-width: 100px;" (click)="approveRequest(request.idLandlord, request.idTenant, request.idProperty)"></button>-->
+<!--        <button pButton pRipple type="button" label="Decline" class="p-button-raised p-button-danger" style="max-width: 100px"></button>-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--      </div>-->
+<!--    </div>-->
+
+    <p-button (click)="showResponsiveDialog()" icon="pi pi-check" label="Approve"></p-button>
+    <p-dialog header="Schedule an appointment for clarifications / final details for closing contract" [(visible)]="displayResponsive" [breakpoints]="{'960px': '75vw'}" [style]="{width: '50vw'}"
+              [draggable]="false" [resizable]="false">
+      <form [formGroup]="scheduleAppointment">
+      <div class="p-field p-col-12 p-md-4" style="overflow: visible;z-index: 999;">
+        <label>Choose a date:</label>
+        <p-calendar appendTo="body" [(ngModel)]="dateForAppointment" [showTime]="true" inputId="time" formControlName="date"></p-calendar>
       </div>
-    </div>
+      </form>
+<!--      <p> Contact number: {{this.currentUser.mobileNumber}}</p>-->
+      <ng-template pTemplate="footer">
+        <p-button (click)="displayResponsive=false" (onClick)="sendEvaluationResult(request.idLandlord, request.idTenant,request.idRequest, dateForAppointment)" label="Send" styleClass="p-button-text"></p-button>
+      </ng-template>
+    </p-dialog>
+<!--        <button pButton pRipple type="button" label="Decline" class="p-button-raised p-button-danger" style="max-width: 100px"></button>-->
+
+
   </div>
 </div>
