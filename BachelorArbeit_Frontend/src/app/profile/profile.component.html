@@ -5,7 +5,7 @@
     <div class="topnav-left">
   <button pButton icon="pi pi-home" class="p-button-text p-button-secondary profileBtn" (click)="goToHome()"></button>
     </div>
-    <p-button *ngIf="user.role=='landlord'" label="Requests" icon="pi pi-bell"  badge="{{this.notifications}}" (click)="goToRentalRequests()"></p-button>
+    <p-button *ngIf="user.role=='landlord'" label="New requests" icon="pi pi-bell"  badge="{{this.notifications}}" (click)="goToRentalRequests()"></p-button>
 
   <button pButton class="p-button-text p-button-secondary profileBtn">My role: {{role.toUpperCase()}} </button>
   </div>

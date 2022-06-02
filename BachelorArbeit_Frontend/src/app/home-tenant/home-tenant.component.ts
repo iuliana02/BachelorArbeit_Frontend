@@ -35,7 +35,8 @@ export class HomeTenantComponent implements OnInit {
         label: '', disabled : true
       },
       {
-        label: 'My apartment',
+        label: 'Appointments',
+        url: 'appointments-tenant'
       }
       ]
   }

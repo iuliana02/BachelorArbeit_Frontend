@@ -60,7 +60,7 @@ export class NavigationToolbarTenantComponent implements OnInit {
   }
 
   logout() {
-    this.userService.logout(String(localStorage.getItem("email")))
+    this.userService.logout(String(localStorage.getItem("emailLogin"))).subscribe()
     // @ts-ignore
     localStorage.setItem('email', null);
     // @ts-ignore
@@ -77,5 +77,10 @@ export class NavigationToolbarTenantComponent implements OnInit {
 
   displayNotifications() {
     $(".dropdown").toggleClass("active");
+  }
+
+  goToAppointments() {
+    this.router.navigate(['appointments-tenant'])
+
   }
 }

@@ -55,6 +55,7 @@ import {NgxChartsModule} from "@swimlane/ngx-charts";
 import { DivisiontypePieChartComponent } from './statistics/divisiontype-pie-chart/divisiontype-pie-chart.component';
 import {DialogModule} from "primeng/dialog";
 import {CalendarModule} from "primeng/calendar";
+import { AppointmentsTenantComponent } from './appointments-tenant/appointments-tenant.component';
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import {CalendarModule} from "primeng/calendar";
         FirstPageNavigationComponent,
         PropertiesListLandlordComponent,
         BarChartsComponent,
-        DivisiontypePieChartComponent
+        DivisiontypePieChartComponent,
+        AppointmentsTenantComponent
     ],
   imports: [
     CommonModule,

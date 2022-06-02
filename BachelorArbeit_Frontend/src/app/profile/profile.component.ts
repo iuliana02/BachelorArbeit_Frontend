@@ -43,8 +43,8 @@ export class ProfileComponent implements OnInit {
     )
 
     if (this.user.role == 'landlord') {
-      this.rentalRequestService.getNumberOfRentalRequests(this.user.userId).subscribe(response => {
-          this.notifications = response.data;
+      this.rentalRequestService.getNonevaluatedRentalRequestsForLandlord(this.user.userId).subscribe(response => {
+          this.notifications = response.data.length;
           console.log(response)
         }
       )

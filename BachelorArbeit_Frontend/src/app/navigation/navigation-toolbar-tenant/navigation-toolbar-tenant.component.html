@@ -11,7 +11,8 @@
         </div>
         <div class="dropdown">
           <div class="notify_item" *ngFor="let notification of this.notifications">
-              <p> {{notification.message}}</p>
+              <p *ngIf='notification.type=="ACCEPTED_REQUEST"' (click)="goToAppointments()" class="pointer"> {{notification.message}}</p>
+              <p *ngIf='notification.type!="ACCEPTED_REQUEST"' > {{notification.message}}</p>
               <div class="notify_time">{{notification.date}}</div>
           </div>
         </div>

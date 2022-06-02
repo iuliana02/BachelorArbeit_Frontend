@@ -16,6 +16,7 @@ import {LoggedInGuard} from "./guards/loggedin-guard";
 import {
   PropertiesListLandlordComponent
 } from "./properties/properties-list-landlord/properties-list-landlord.component";
+import {AppointmentsTenantComponent} from "./appointments-tenant/appointments-tenant.component";
 
 const routes: Routes = [
   {
@@ -86,6 +87,11 @@ const routes: Routes = [
   {
     path: 'rental-request',
     component: RentalRequestComponent,
+    canActivate:[LoggedInGuard]
+  },
+  {
+    path: 'appointments-tenant',
+    component: AppointmentsTenantComponent,
     canActivate:[LoggedInGuard]
   }
 ];

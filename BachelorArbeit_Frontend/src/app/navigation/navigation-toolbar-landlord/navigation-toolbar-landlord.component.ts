@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {MegaMenuItem} from "primeng/api";
 import {Router} from "@angular/router";
 import {UserService} from "../../service/user.service";
+import {RentalRequestService} from "../../service/rental-request.service";
+import {User} from "../../model/user";
 
 @Component({
   selector: 'app-navigation-toolbar-landlord',
@@ -9,12 +11,27 @@ import {UserService} from "../../service/user.service";
   styleUrls: ['./navigation-toolbar-landlord.component.css']
 })
 export class NavigationToolbarLandlordComponent implements OnInit {
-  constructor(public router : Router, private userService: UserService) { }
+  notifications: number;
+  user: any = {} as User;
+  users!: User[];
 
-  ngOnInit(): void {
+  constructor(public router : Router, private userService: UserService,
+              private rentalRequestService: RentalRequestService) { }
+  async ngOnInit() {
+    await this.userService.getAllUsers().toPromise().then((data) =>{
+      if (data.success){
+        this.users = data.data;
+        console.log(this.users)
+      }
+    })
+    this.user = this.users.find((x) => x.username === localStorage.getItem("emailLogin"));
 
+    this.rentalRequestService.getNonevaluatedRentalRequestsForLandlord(this.user.userId).subscribe(response => {
+        this.notifications = response.data.length;
+        console.log(response)
+      }
+    )
   }
-
 
   goToProfile() {
     this.router.navigate(['profile'])
@@ -29,7 +46,8 @@ export class NavigationToolbarLandlordComponent implements OnInit {
     // localStorage.setItem('fullName', null);
     // // @ts-ignore
     // localStorage.setItem('token', null);
-    this.userService.logout(String(localStorage.getItem("emailLogin")))
+    console.log(String(localStorage.getItem("emailLogin")))
+    this.userService.logout(String(localStorage.getItem("emailLogin"))).subscribe()
     localStorage.clear()
     this.router.navigate(['first-page'])
   }
@@ -40,5 +58,9 @@ export class NavigationToolbarLandlordComponent implements OnInit {
 
   addNewProperty() {
     this.router.navigate(['add-property'])
+  }
+
+  goToRentalRequests() {
+    this.router.navigate(['rental-request'])
   }
 }

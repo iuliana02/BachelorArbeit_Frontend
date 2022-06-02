@@ -3,7 +3,9 @@
     <div class="topnav-left">
     <button pButton icon="pi pi-home" class="p-button-text p-button-secondary profileBtn" (click)="goToHome()"></button>
     </div>
-  <button pButton icon="pi pi-user" class="p-button-text p-button-secondary profileBtn" (click)="goToProfile()"></button>
+    <p-button label="New requests" icon="pi pi-bell" class="notification_icon"  badge="{{this.notifications}}" (click)="goToRentalRequests()"></p-button>
+
+    <button pButton icon="pi pi-user" class="p-button-text p-button-secondary profileBtn" (click)="goToProfile()"></button>
     <div class="topnav-centered">
     <button pButton class="p-button-text p-button-secondary addProperty" icon="pi pi-plus" (click)="addNewProperty()" label="Add property"></button>
     </div>

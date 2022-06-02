@@ -1,27 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from "../model/user";
-import {UserService} from "../service/user.service";
 import {PropertyService} from "../service/property.service";
 import {DomSanitizer} from "@angular/platform-browser";
 import {DatePipe} from "@angular/common";
+import {UserService} from "../service/user.service";
 
 @Component({
-  selector: 'app-tenants-list',
-  templateUrl: './tenants-list.component.html',
-  styleUrls: ['./tenants-list.component.css']
+  selector: 'app-appointments-tenant',
+  templateUrl: './appointments-tenant.component.html',
+  styleUrls: ['./appointments-tenant.component.css']
 })
-export class TenantsListComponent implements OnInit {
+export class AppointmentsTenantComponent implements OnInit {
   tenantsApartmentsList : any[][] = []
   retrieveResponse: any;
   retrievedImage: any;
   base64Data: any;
   imageIdList : any[] = [];
-
-  constructor(private userService: UserService, private propertyService: PropertyService, private sanitizer: DomSanitizer) { }
+  constructor(private propertyService: PropertyService, private sanitizer: DomSanitizer,
+              private userService: UserService) { }
 
   async ngOnInit() {
-    await this.userService.getAcceptedTenantsForLandlord(Number(localStorage.getItem('idUser'))).toPromise().then((res):any => {
+    await this.userService.getEvaluatedRequestsForTenant(Number(localStorage.getItem('idUser'))).toPromise().then((res):any => {
       this.tenantsApartmentsList = res.data;
+      console.log(this.tenantsApartmentsList)
     })
     for (let apart of this.tenantsApartmentsList) {
       apart[1]['correspondingApartment'].imagesToShow = await this.getImages(apart[1]['correspondingApartment'].idProperty)

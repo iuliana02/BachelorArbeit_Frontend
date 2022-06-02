@@ -9,7 +9,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
       req = req.clone({
         setHeaders: {
-          // 'Content-Type': 'multipart/form-data',
           'Accept': 'application/json; multipart/form-data',
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
           'Access-Control-Allow-Origin': 'http://localhost:4201',

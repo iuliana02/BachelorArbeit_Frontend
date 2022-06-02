@@ -47,12 +47,12 @@ export class HomeComponent implements OnInit {
         // {label: "Not rented apartments", url: 'properties-list'}] as MenuItem
       },
       {
-        label: 'My tenants',
-        url: 'tenants-list'
-      },
-      {
         label: 'Tenant requests',
         url: 'rental-request'
+      },
+      {
+        label: 'Appointments',
+        url: 'tenants-list'
       }
     ]
     const datepipe: DatePipe = new DatePipe('en-US')

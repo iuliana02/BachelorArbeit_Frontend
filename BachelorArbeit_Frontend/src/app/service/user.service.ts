@@ -105,4 +105,11 @@ export class UserService {
     return this.backendService.get(`${this.baseURL}/getAcceptedTenantsForLandlord`, params)
   }
 
+  getEvaluatedRequestsForTenant(tenantId: number) {
+    let params = new HttpParams();
+    params = params.append('tenantId', tenantId);
+    return this.backendService.get(`${this.baseURL}/getEvaluatedRequestsForTenant`, params)
+
+  }
+
 }

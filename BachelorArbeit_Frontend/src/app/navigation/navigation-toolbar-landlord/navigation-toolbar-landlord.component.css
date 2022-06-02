@@ -12,3 +12,9 @@
   left: 3%;
   transform: translate(-10%, -0%);
 }
+
+.notification_icon{
+  position: relative;
+  left: -100px;
+  width: 40px;
+}
