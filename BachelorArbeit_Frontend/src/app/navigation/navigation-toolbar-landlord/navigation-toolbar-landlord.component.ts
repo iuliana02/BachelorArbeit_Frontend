@@ -4,6 +4,10 @@ import {Router} from "@angular/router";
 import {UserService} from "../../service/user.service";
 import {RentalRequestService} from "../../service/rental-request.service";
 import {User} from "../../model/user";
+import {BackendWsService} from "../../backend/backend-ws.service";
+import {map} from "rxjs/operators";
+import {Subject, takeUntil} from "rxjs";
+import {RentalRequest} from "../../model/rentalRequest";
 
 @Component({
   selector: 'app-navigation-toolbar-landlord',
@@ -11,12 +15,14 @@ import {User} from "../../model/user";
   styleUrls: ['./navigation-toolbar-landlord.component.css']
 })
 export class NavigationToolbarLandlordComponent implements OnInit {
+  rentalRequests: RentalRequest[] = [];
   notifications: number;
   user: any = {} as User;
   users!: User[];
+  private unsubscribeSubject: Subject<void> = new Subject<void>();
 
   constructor(public router : Router, private userService: UserService,
-              private rentalRequestService: RentalRequestService) { }
+              private rentalRequestService: RentalRequestService, private backendWsService: BackendWsService) { }
   async ngOnInit() {
     await this.userService.getAllUsers().toPromise().then((data) =>{
       if (data.success){
@@ -26,11 +32,17 @@ export class NavigationToolbarLandlordComponent implements OnInit {
     })
     this.user = this.users.find((x) => x.username === localStorage.getItem("emailLogin"));
 
-    this.rentalRequestService.getNonevaluatedRentalRequestsForLandlord(this.user.userId).subscribe(response => {
-        this.notifications = response.data.length;
-        console.log(response)
-      }
-    )
+    this.backendWsService
+      .getNonevaluatedRequests(Number(localStorage.getItem('idUser')))
+      .pipe(map(requests => requests), takeUntil(this.unsubscribeSubject))
+      .subscribe(rentalRequests => this.rentalRequests = rentalRequests)
+    this.backendWsService
+      .onRentalRequest()
+      .pipe(takeUntil(this.unsubscribeSubject))
+      .subscribe(req => {
+        this.rentalRequests.push(req);
+      });
+
   }
 
   goToProfile() {
@@ -62,5 +74,10 @@ export class NavigationToolbarLandlordComponent implements OnInit {
 
   goToRentalRequests() {
     this.router.navigate(['rental-request'])
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribeSubject.next();
+    this.unsubscribeSubject.complete();
   }
 }

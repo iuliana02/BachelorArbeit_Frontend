@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {RentalRequest} from "../model/rentalRequest";
 import {RentalRequestService} from "../service/rental-request.service";
 import {UserService} from "../service/user.service";
-import {Observable} from "rxjs";
+import {Observable, Subject, takeUntil} from "rxjs";
 import {MessageService} from "primeng/api";
 import {Router} from "@angular/router";
 import {SharedService} from "../SharedService";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {User} from "../model/user";
 import {FormControl, FormGroup} from "@angular/forms";
+import {BackendWsService} from "../backend/backend-ws.service";
+import {first, map} from "rxjs/operators";
 
 
 @Component({
@@ -17,32 +19,43 @@ import {FormControl, FormGroup} from "@angular/forms";
   styleUrls: ['./rental-request.component.css']
 })
 export class RentalRequestComponent implements OnInit {
+  @Input()
   rentalRequests: RentalRequest[] = [];
   noRentalRequests: boolean;
   dateForAppointment: Date;
   scheduleAppointment!: FormGroup;
   // idUser: any;
   // currentUser = {} as User;
+  private unsubscribeSubject: Subject<void> = new Subject<void>();
 
   constructor(private rentalRequestService: RentalRequestService,private router: Router,
               private userService: UserService, private messageService: MessageService,
-              private sharedService: SharedService, private modalService: NgbModal) { }
+              private sharedService: SharedService, private modalService: NgbModal,
+              private backendWsService: BackendWsService) { }
 
   async ngOnInit(): Promise<void> {
-    // this.idUser = localStorage.getItem("idUser");
-    // this.userService.getUserById(this.idUser).subscribe(res => {
-    //   this.currentUser = res.data
-    // })
-    // console.log("proprietar")
-    // console.log(Number(localStorage.getItem("idUser")))
-    // console.log(this.currentUser.firstName)
-    await this.getNonevaluatedRentalRequestsForLandlord(Number(localStorage.getItem('idUser')))
-    console.log(this.rentalRequests)
-    for (let request of this.rentalRequests) {
-      await this.userService.getUserById(request.idTenant).subscribe(response => {
-        request.nameRequester = response.data.firstName + " " + response.data.lastName;
+
+    this.backendWsService
+      .getNonevaluatedRequests(Number(localStorage.getItem('idUser')))
+      .pipe(map(requests => this.addTenantNames(requests)), takeUntil(this.unsubscribeSubject))
+      .subscribe(async rentalRequests => this.rentalRequests = await rentalRequests)
+    this.backendWsService
+      .onRentalRequest()
+      .pipe(takeUntil(this.unsubscribeSubject))
+      .subscribe(req => {
+        this.rentalRequests.push(req);
+        this.addTenantNames(this.rentalRequests)
       });
-    }
+
+    // await this.getNonevaluatedRentalRequestsForLandlord(Number(localStorage.getItem('idUser')))
+    // for (let request of this.rentalRequests) {
+    //   await this.userService.getUserById(request.idTenant).subscribe(response => {
+    //     request.nameRequester = response.data.firstName + " " + response.data.lastName;
+    //   });
+    // }
+
+    console.log("this.rentalRequests")
+    console.log(this.rentalRequests)
 
     if (this.rentalRequests.length==0)
       this.noRentalRequests = true
@@ -52,9 +65,12 @@ export class RentalRequestComponent implements OnInit {
     this.scheduleAppointment = new FormGroup({
       date: new FormControl()
     })
+
+
   }
 
   async getNonevaluatedRentalRequestsForLandlord(idLandlord: number) {
+    console.log("getNonevaluatedRentalRequestsForLandlord")
     await this.rentalRequestService.getNonevaluatedRentalRequestsForLandlord(idLandlord).toPromise().then((response) => {
       this.rentalRequests = response.data;
     })
@@ -71,8 +87,6 @@ export class RentalRequestComponent implements OnInit {
 
 
   async sendEvaluationResult(landlordId: number, tenantId: number, idRequest: number, appointmentDate: Date) {
-    // console.log(idLandlord)
-    // console.log(idTenant)
     this.dateForAppointment = this.scheduleAppointment.controls['date'].value;
     this.rentalRequestService.setAppointmentDate(idRequest, this.dateForAppointment).subscribe(res =>{})
 
@@ -80,17 +94,8 @@ export class RentalRequestComponent implements OnInit {
       if (response.success)
         console.log("succesfully added tenant to landlord")
     })
-    // await this.rentalRequestService.removeRentalrequest(propertyId).then(response => {
-    //   console.log("succesfully removed rental request")
-    // })
-    // await this.getRentalRequestsForLandlord(Number(localStorage.getItem('idUser')))
-    // console.log(this.rentalRequests)
 
-    this.messageService.add({severity: 'info', summary: 'New tenant added', detail: ''});
-    // this.rentalRequestService.getNonevaluatedRentalRequestsForLandlord(Number(localStorage.getItem('idUser'))).toPromise().then(res =>{
-    //   this.rentalRequests = res.data;
-    // })
-    // await this.router.navigate(['rental-request'])
+    this.messageService.add({severity: 'info', summary: 'Rental request successfully evaluated!', detail: ''});
   }
 
   async declineRequest(idLandlord: number, idTenant: number, propertyId: number) {
@@ -104,5 +109,17 @@ export class RentalRequestComponent implements OnInit {
     this.displayResponsive = true;
   }
 
+  async addTenantNames(requests: RentalRequest[]) {
+    for (let request of requests) {
+      await this.userService.getUserById(request.idTenant).subscribe(response => {
+        request.nameRequester = response.data.firstName + " " + response.data.lastName;
+      });
+    }
+    return requests;
+  }
 
+  ngOnDestroy(): void {
+    this.unsubscribeSubject.next();
+    this.unsubscribeSubject.complete();
+  }
 }

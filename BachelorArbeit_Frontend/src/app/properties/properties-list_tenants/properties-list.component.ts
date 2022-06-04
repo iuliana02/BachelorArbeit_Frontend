@@ -4,7 +4,6 @@ import {PropertyService} from "../../service/property.service";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {DomSanitizer} from "@angular/platform-browser";
-import {BackendService} from "../../backend/backend.service";
 import {Router} from "@angular/router";
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Property} from "../../model/property";
@@ -12,8 +11,7 @@ import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {RentalRequest} from "../../model/rentalRequest";
 import {User} from "../../model/user";
 import {UserService} from "../../service/user.service";
-import {Stomp} from "@stomp/stompjs";
-import {AppComponent} from "../../app.component";
+import {BackendWsService} from "../../backend/backend-ws.service";
 
 
 @Component({
@@ -39,7 +37,8 @@ export class PropertiesListComponent implements OnInit {
 
   constructor(public propertyService: PropertyService, private modalService: NgbModal,
               private messageService: MessageService, private sanitizer: DomSanitizer,
-              private userService: UserService) {
+              private userService: UserService, private backendWsService: BackendWsService,
+              private router: Router) {
   }
 
   async ngOnInit(): Promise<void> {
@@ -77,6 +76,7 @@ export class PropertiesListComponent implements OnInit {
     })
 
     console.log(this.currentUser)
+    // this.stompService.subscribe('topic/rental-request')
   }
 
   async getImages(idProperty: number): Promise<any[]> {
@@ -199,31 +199,16 @@ export class PropertiesListComponent implements OnInit {
 
   public sendRentalRequest(apartment: Property) {
     let rentalRequest = {} as RentalRequest;
-    rentalRequest.question1 = this.rentalRequest.controls['question1'].value;
-    rentalRequest.question2 = this.rentalRequest.controls['question2'].value;
-    rentalRequest.question3 = this.rentalRequest.controls['question3'].value;
-    this.propertyService.sendRentalRequest(rentalRequest, Number(apartment.idUser), Number(localStorage.getItem("idUser")), apartment.idProperty).subscribe(response => {
-        if (response.success) {
-          this.messageService.add({severity: 'success', summary: 'Succesfully sent rental request', detail: "null"})
-          this.modalService.dismissAll();
-        }
-      }
-    );
+      rentalRequest.question1 = this.rentalRequest.controls['question1'].value;
+      rentalRequest.question2 = this.rentalRequest.controls['question2'].value;
+      rentalRequest.question3 = this.rentalRequest.controls['question3'].value;
+      rentalRequest.idLandlord = Number(apartment.idUser);
+      rentalRequest.idTenant = Number(localStorage.getItem("idUser"));
+      rentalRequest.idProperty = apartment.idProperty;
+      this.backendWsService.saveRentalRequest(rentalRequest);
+      this.messageService.add({severity: 'success', summary: 'Succesfully sent rental request', detail: "null"})
+      this.modalService.dismissAll();
+      this.router.navigate(['properties-list'])
+    }
+
   }
-
-  // connect(event: any) {
-  //   username = document.querySelector('#name').value.trim();
-  //
-  //   if(username) {
-  //     usernamePage.classList.add('hidden');
-  //     chatPage.classList.remove('hidden');
-  //
-  //     var socket = new SockJS('/javatechie');
-  //     let stompClient = Stomp.over(socket);
-  //
-  //     stompClient.connect({}, onConnected, onError);
-  //   }
-  //   event.preventDefault();
-  // }
-
-}
