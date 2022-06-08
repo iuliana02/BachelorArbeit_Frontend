@@ -7,7 +7,7 @@
         <p> Your agent: {{tenantApartment[0]["landlordOfRequest"].firstName}} {{tenantApartment[0]["landlordOfRequest"].lastName}}</p>
       </p-header>
       <div class="card-body ">
-        <p-tag styleClass="p-mr-2"  class="position-relative top-1 start-50 badge" style="margin-left: 480px"
+        <p-tag styleClass="p-mr-2"  class="position-relative top-1 start-50 badge"
                severity="warning"> #{{tenantApartment[1]["correspondingApartment"].idProperty}}
         </p-tag>
         <h5 class="card-title text-900">Apartment with {{tenantApartment[1]["correspondingApartment"].nrOfRooms +' rooms, ' + tenantApartment[1]["correspondingApartment"].divisionType + ', ' + tenantApartment[1]["correspondingApartment"].area + ' mp2'}}</h5>
@@ -37,10 +37,5 @@
       </div>
     </p-accordionTab>
 
-<!--    <p-header>-->
-<!--      <p>Tenant {{tenantApartment[0]["evaluatedUser"].firstName}} {{tenantApartment[0]["evaluatedUser"].lastName}}</p>-->
-<!--      <p> Contact : {{tenantApartment[0]["evaluatedUser"].mobileNumber}}</p>-->
-<!--      <p style="margin-left:600px"> Appointment date: {{tenantApartment[2]["appointmentDate"]}}</p>-->
-<!--    </p-header>-->
   </p-accordion>
 </div>

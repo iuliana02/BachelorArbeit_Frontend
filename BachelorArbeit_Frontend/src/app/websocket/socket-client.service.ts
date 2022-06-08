@@ -48,7 +48,7 @@ export class SocketClientService implements OnDestroy {
     return this.onMessage(topic, SocketClientService.textHandler);
   }
 
-  send(topic: string, headers: any, payload: any): void {
+  send(topic: string, headers?: any, payload?: any): void {
     this.connect()
       .pipe(first())
       .subscribe(inst => inst.send(topic, headers, JSON.stringify(payload)));

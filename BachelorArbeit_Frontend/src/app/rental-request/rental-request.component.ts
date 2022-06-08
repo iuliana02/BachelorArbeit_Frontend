@@ -19,7 +19,6 @@ import {first, map} from "rxjs/operators";
   styleUrls: ['./rental-request.component.css']
 })
 export class RentalRequestComponent implements OnInit {
-  @Input()
   rentalRequests: RentalRequest[] = [];
   noRentalRequests: boolean;
   dateForAppointment: Date;
@@ -69,13 +68,6 @@ export class RentalRequestComponent implements OnInit {
 
   }
 
-  async getNonevaluatedRentalRequestsForLandlord(idLandlord: number) {
-    console.log("getNonevaluatedRentalRequestsForLandlord")
-    await this.rentalRequestService.getNonevaluatedRentalRequestsForLandlord(idLandlord).toPromise().then((response) => {
-      this.rentalRequests = response.data;
-    })
-  }
-
   async getUsernameById (idUser : number):Promise<string> {
     let username: string = ""
      await this.userService.getUserById(idUser).subscribe(response => {
@@ -88,14 +80,13 @@ export class RentalRequestComponent implements OnInit {
 
   async sendEvaluationResult(landlordId: number, tenantId: number, idRequest: number, appointmentDate: Date) {
     this.dateForAppointment = this.scheduleAppointment.controls['date'].value;
-    this.rentalRequestService.setAppointmentDate(idRequest, this.dateForAppointment).subscribe(res =>{})
-
-    await this.userService.evaluateTenantRequest(landlordId, tenantId, idRequest, appointmentDate).toPromise().then((response):any => {
-      if (response.success)
-        console.log("succesfully added tenant to landlord")
-    })
-
+    this.backendWsService.evaluateRequest(landlordId, tenantId, idRequest, appointmentDate)
     this.messageService.add({severity: 'info', summary: 'Rental request successfully evaluated!', detail: ''});
+    await this.rentalRequestService.getNonevaluatedRentalRequestsForLandlord(landlordId).toPromise().then((response) => {
+      this.rentalRequests = response.data;
+      console.log(this.rentalRequests)
+    })
+    await this.router.navigate(['rental-request'])
   }
 
   async declineRequest(idLandlord: number, idTenant: number, propertyId: number) {

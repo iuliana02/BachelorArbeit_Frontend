@@ -236,20 +236,4 @@ export class LikedPropertiesComponent implements OnInit {
   }
 
 
-  // //websocket
-  // connect() {
-  //   this.webSocketAPI._connect();
-  // }
-  //
-  // disconnect() {
-  //   this.webSocketAPI._disconnect();
-  // }
-  //
-  // sendMessage(rentalRequest: any) {
-  //   this.webSocketAPI._send(rentalRequest);
-  // }
-  //
-  // handleMessage(message: any) {
-  //   // this.greeting = message.body;
-  // }
 }

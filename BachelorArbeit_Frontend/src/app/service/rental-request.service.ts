@@ -33,6 +33,7 @@ export class RentalRequestService {
   public getNonevaluatedRentalRequestsForLandlord(idLandlord: number):Observable<any> {
     let params = new HttpParams();
     params = params.append('idUser', idLandlord);
+    console.log("getNonevaluatedRequestsForLandlord")
     return this.backendService.get(`${this.baseURL}/getNonevaluatedRequestsForLandlord`, params)
   }
 
