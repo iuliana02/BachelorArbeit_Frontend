@@ -17,4 +17,18 @@
   text-align: center;
 }
 
+.hover {
+  background-color: yellowgreen;
+  border: yellowgreen;
+}
 
+.brown {
+  background-color: darkmagenta;
+  border: darkmagenta;
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

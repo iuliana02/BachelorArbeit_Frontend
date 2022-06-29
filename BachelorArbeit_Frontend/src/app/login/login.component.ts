@@ -31,6 +31,8 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.userService.login(this.loginForm.controls['emailLogin'].value, this.loginForm.controls['passwordLogin'].value).subscribe(response => {
+      console.log("response")
+      console.log(response)
       if (response.success) {
         localStorage.setItem('idUser', response.data.userId);
         localStorage.setItem('firstName', response.data.firstName);
@@ -51,7 +53,16 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['home-landlord']);
         else if (response.data.role == "tenant")
           this.router.navigate(['home-tenant']);
-      } else
+      }
+      else if (response.message == "Wrong username") {
+        this.messageService.add({severity: 'error', summary: 'Wrong username', detail: response.message});
+
+      }
+      else if (response.message == "Wrong password") {
+        this.messageService.add({severity: 'error', summary: "Wrong password", detail: response.message});
+
+      }
+      else
         this.messageService.add({severity: 'error', summary: 'Login error', detail: response.message});
     })
 

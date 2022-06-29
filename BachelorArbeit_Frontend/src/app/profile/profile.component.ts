@@ -54,7 +54,7 @@ export class ProfileComponent implements OnInit {
   edit() {
     this.profileForm.controls['firstName'].enable();
     this.profileForm.controls['lastName'].enable();
-    this.profileForm.controls['username'].enable();
+    // this.profileForm.controls['username'].enable();
     this.profileForm.controls['phoneNumber'].enable();
     this.profileForm.controls['birthDay'].enable();
   }

@@ -1,7 +1,8 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <p-megaMenu [model]="verticalMenu" orientation="vertical"></p-megaMenu>
 
-
-<div style="margin-left: 200px;">
+<div fxLayout="column" class="centered">
+<div >
   <p>
   <h2> Daily statistics for {{formatCurrentDate}}</h2>
   <table>
@@ -19,11 +20,19 @@
 <!--<app-properties-list-landlord></app-properties-list-landlord>-->
 
 <br><br>
-<div style="margin-left: 200px;">
-  <p>
-  <h2> Most liked apartment:  {{this.mostLikedApartment.nrOfLikes}}</h2>
+<div fxLayout="column" class="centered" *ngIf="noApartments==false">
+  <p style="flex: auto">
+  <h2> Your most liked apartment
+  <div style="margin-left: 1050px">
+    {{this.mostLikedApartment.nrOfLikes}}
+    <mat-icon
+      aria-label="Example icon-button with a heart icon">
+      favorite
+    </mat-icon>
+  </div>
+  </h2>
 </div>
-<div class="card w-75 classCard">
+<div class="card w-75" fxLayout="column" *ngIf="noApartments==false">
   <div class="card-body">
     <p-tag styleClass="p-mr-2" class="position-relative top-1 start-50 badge"
            severity="warning"> Posted on: {{this.mostLikedApartment.postDate}}
@@ -68,4 +77,5 @@
       <p-image [src]='img' width="200px" [preview]="true"></p-image>
     </div>
   </div>
+</div>
 </div>

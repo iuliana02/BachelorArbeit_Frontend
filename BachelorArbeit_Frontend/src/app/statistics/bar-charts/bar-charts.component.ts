@@ -12,7 +12,7 @@ export class BarChartsComponent implements OnInit {
   facilityTypes: any[] = []
   facilityTypesEn: any[] = []
 
-  view: [number, number] = [600, 400];
+  view: [number, number] = [550, 300];
 
   // options
   legendTitle: string = 'Finishing types';

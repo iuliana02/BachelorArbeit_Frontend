@@ -56,6 +56,9 @@ import { DivisiontypePieChartComponent } from './statistics/divisiontype-pie-cha
 import {DialogModule} from "primeng/dialog";
 import {CalendarModule} from "primeng/calendar";
 import { AppointmentsTenantComponent } from './appointments-tenant/appointments-tenant.component';
+import { FlexLayoutModule } from "@angular/flex-layout";
+import {MbscFormsModule, MbscInputModule} from "@mobiscroll/angular-lite";
+import {MDBRootModule} from "angular-bootstrap-md";
 
 
 @NgModule({
@@ -117,7 +120,11 @@ import { AppointmentsTenantComponent } from './appointments-tenant/appointments-
     FontAwesomeModule,
     NgxChartsModule,
     DialogModule,
-    CalendarModule
+    CalendarModule,
+    FlexLayoutModule,
+    MbscInputModule,
+    MbscFormsModule,
+    MDBRootModule,
   ],
     providers: [MessageService, LoggedInGuard,
         {

@@ -1,12 +1,13 @@
 <!--<app-home></app-home>-->
 <p-toast position="bottom-center"></p-toast>
 
-<div class="card w-75 classCard" *ngFor="let apartment of this.apartments">
+<div fxLayout="column" class="centered" *ngIf="apartments.length!=0">
+<div class="card w-75" *ngFor="let apartment of this.apartments">
   <div class="card-body">
     <p-tag styleClass="p-mr-2"  class="position-relative top-1 start-50 badge"
            severity="warning"> Posted on: {{apartment.postDate}}
     </p-tag>
-    <p-tag styleClass="p-mr-2"  class="position-relative top-1 start-50 badge" style="margin-left: 480px"
+    <p-tag styleClass="p-mr-2"  class="position-relative top-1 start-50 badge"
            severity="warning"> #{{apartment.idProperty}}
     </p-tag>
     <h5 class="card-title text-900">Apartment with {{apartment.nrOfRooms +' rooms, ' + apartment.divisionType + ', ' + apartment.area + ' mp2'}}</h5>
@@ -34,23 +35,22 @@
     <div *ngFor="let img of apartment.imagesToShow" class="flex-container" style="padding-left: 40px">
       <p-image  [src]= 'img' width="200px" [preview]="true"></p-image>
     </div>
-<!--    <p-galleria [value]="this.imagesToShow" [responsiveOptions]="responsiveOptions" [containerStyle]="{'max-width': '640px'}" [numVisible]="5">-->
-<!--      <ng-template pTemplate="item" let-item>-->
-<!--        <img [src]="item" style="width: 100%;" />-->
-<!--      </ng-template>-->
-<!--      <ng-template pTemplate="thumbnail" let-item>-->
-<!--        <div class="grid grid-nogutter justify-content-center">-->
-<!--          <img [src]="item" />-->
-<!--        </div>-->
-<!--      </ng-template>-->
-<!--    </p-galleria>-->
 
+    <div class="container">
+      <div class="container2" style="padding-top: 20px">
+        <div class="col-sm price" style="text-align: center">
+          Price: {{apartment.price}} €
+        </div>
+      </div> <br>
 
   </div>
   <div class="card-footer text-muted">
   </div>
 </div>
-<!--</div>-->
+</div>
+</div>
 
-
+<div fxLayout="column" class="centered" *ngIf="apartments.length==0">
+  <h2> You have no listed apartments yet!</h2>
+</div>
 

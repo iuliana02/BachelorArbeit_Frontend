@@ -70,30 +70,11 @@ export class AddPropertyComponent implements OnInit {
       price: new FormControl()
     })
     this.anyFieldEmpty = false;
+
+    console.log("idUser")
+    console.log(localStorage.getItem("idUser"))
+    console.log(localStorage)
   }
-
-  // selectFile(event: any) {
-  // const file = event.target.files.item(0);
-  //
-  // if (file.type.match('image.*')) {
-  //   var size = event.target.files[0].size;
-  //   if(size > 1000000)
-  //   {
-  //     alert("size must not exceeds 1 MB");
-  //     // @ts-ignore
-  //     this.newPropertyForm.get('propertyImage').setValue("");
-  //   }
-  //   else
-  //   {
-  //     this.selectedFiles = event.target;
-
-  //   }
-  // } else {
-  //   alert('invalid format!');
-  // }
-
-  // console.log(this.selectedFiles)
-  // }
 
   onUpload(event:any) {
     for(let file of event.files) {
@@ -104,7 +85,7 @@ export class AddPropertyComponent implements OnInit {
       // this.uploadPhoto(file);
     }
 
-    this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
+    this.messageService.add({severity: 'info', summary: 'Photos uploaded', detail: ''});
   }
 
   setPropertyValues() {
@@ -130,11 +111,12 @@ export class AddPropertyComponent implements OnInit {
 
   saveProperty() {
     this.errorMessageForSave = true;
+    this.errorMessageForPredict = false;
     this.setPropertyValues();
     this.validateFields();
 
-    if (this.uploadedFiles.length < 5) {
-      this.messageService.add({severity: 'error', summary: 'Please upload at least 5 images', detail: "null"})
+    if (this.uploadedFiles.length < 4) {
+      this.messageService.add({severity: 'error', summary: 'Please upload at least 4 images', detail: ""})
       return;
     }
 
@@ -142,12 +124,12 @@ export class AddPropertyComponent implements OnInit {
       this.propertyService.addProperty(this.newProperty, Number(localStorage.getItem("idUser"))).subscribe(response => {
         if (response.success) {
           console.log("property success")
-          if (this.uploadedFiles != null && this.uploadedFiles.length>4)
+          if (this.uploadedFiles != null && this.uploadedFiles.length>=4)
             for (let file of this.uploadedFiles) {
               this.uploadPhoto(file);
             }
 
-          this.messageService.add({severity: 'success', summary: 'Succesfully added new property', detail: "null"})
+          this.messageService.add({severity: 'success', summary: 'Succesfully added new property', detail: ""})
           this.property = response.data;
         }
       })
@@ -183,77 +165,142 @@ export class AddPropertyComponent implements OnInit {
       this.emptyLand = true;
       this.anyFieldEmpty = true;
     }
+    else {
+      this.emptyLand = false;
+    }
     if (this.newProperty.city == null) {
       this.emptyCity = true;
       this.anyFieldEmpty = true;
+    }
+    else {
+      this.emptyCity = false;
     }
     if (this.newProperty.street == null) {
       this.emptyStreet = true;
       this.anyFieldEmpty = true;
     }
+    else {
+      this.emptyStreet = false;
+    }
     if (this.newProperty.nr == null) {
       this.emptyNumber = true;
       this.anyFieldEmpty = true;
+    }
+    else {
+      this.emptyNumber = false;
     }
     if (this.newProperty.description == null) {
       this.emptydescription = true;
       this.anyFieldEmpty = true;
     }
+    else {
+      this.emptydescription = false;
+    }
     if (this.newProperty.divisionType == null) {
       this.emptydivType = true;
       this.anyFieldEmpty = true;
+    }
+    else {
+      this.emptydivType = false;
     }
     if (this.newProperty.area == null) {
       this.emptyArea = true;
       this.anyFieldEmpty = true;
     }
+    else {
+      this.emptyArea = false;
+    }
     if (this.newProperty.nrOfRooms == null) {
       this.emptyNrRooms = true;
       this.anyFieldEmpty = true;
+    }
+    else {
+      this.emptyNrRooms = false;
     }
     if (this.newProperty.nrOfBathrooms == null) {
       this.emptyNrBathrooms = true;
       this.anyFieldEmpty = true;
     }
+    else {
+      this.emptyNrBathrooms = false;
+    }
     if (this.newProperty.floor == null) {
       this.emptyFloor = true;
       this.anyFieldEmpty = true;
+    }
+    else {
+      this.emptyFloor = false;
     }
     if (this.newProperty.availableFrom == null) {
       this.emptyAvailableFrom = true;
       this.anyFieldEmpty = true;
     }
+    else {
+      this.emptyAvailableFrom = false;
+    }
     if (this.newProperty.nrOfBalconies == null) {
       this.emptyNrOfBalconies = true;
       this.anyFieldEmpty = true;
+    }
+    else {
+      this.emptyNrOfBalconies = false;
     }
     if (this.newProperty.style == null) {
       this.emptyStyle = true;
       this.anyFieldEmpty = true;
     }
+    else {
+      this.emptyStyle = false;
+    }
     if (this.newProperty.parkingLotsAvailable == null) {
       this.emptyParking = true;
       this.anyFieldEmpty = true;
+    }
+    else {
+      this.emptyParking = false;
     }
 
     if (this.anyFieldEmpty) {
       if (this.errorMessageForSave)
         this.messageService.add({severity: 'error', summary: 'All fields must be completed!', detail: '\n Property has not been added'});
       else if (this.errorMessageForPredict)
-        this.messageService.add({severity: 'warning', summary: 'For a correct estimation, all fields must be completed'});
+        this.messageService.add({severity: 'warning', summary: 'For a correct estimation, please complete all fields.'});
       // this.anyFieldEmpty = false
       return;
     }
   }
 
+  resetNonemptyFields() {
+    if (!this.anyFieldEmpty) {
+      this.emptyLand = false;
+      this.emptyCity = false;
+      this.emptyStreet = false;
+      this.emptyNumber = false;
+      this.emptydescription = false;
+      this.emptydivType = false;
+      this.emptyArea = false;
+      this.emptyNrRooms = false;
+      this.emptyNrBathrooms = false;
+      this.emptyFloor = false;
+      this.emptyAvailableFrom = false;
+      this.emptyNrOfBalconies = false;
+      this.emptyStyle = false;
+      this.emptyParking = false;
+    }
+  }
+
   async predictPrice() {
     this.errorMessageForPredict = true;
+    this.errorMessageForSave = false;
     this.setPropertyValues();
     this.validateFields();
     this.propertyService.predictPrice(this.newProperty).subscribe(response => {
       if (response.success) {
         this.predictedPrice = parseInt(response.data);
         console.log(response.data);
+      }
+      else if (response.error && response.message == "Null values in the property object"){
+        // this.messageService.add({severity: 'warning', summary: 'For a correct estimation, please complete all fields'});
       }
       else
         this.messageService.add({severity: 'warning', summary: 'The estimation process could not be completed!', detail: ''});

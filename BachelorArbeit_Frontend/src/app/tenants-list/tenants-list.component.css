@@ -1,3 +1,9 @@
 .flex-container {
   display: inline-block;
 }
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center
+}

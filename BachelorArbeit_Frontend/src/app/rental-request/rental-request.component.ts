@@ -89,11 +89,11 @@ export class RentalRequestComponent implements OnInit {
     await this.router.navigate(['rental-request'])
   }
 
-  async declineRequest(idLandlord: number, idTenant: number, propertyId: number) {
-    await this.rentalRequestService.removeRentalrequest(propertyId).then(response => {
-      console.log("succesfully removed rental request")
-    })
-  }
+  // async declineRequest(idLandlord: number, idTenant: number, propertyId: number) {
+  //   await this.rentalRequestService.removeRentalrequest(propertyId).then(response => {
+  //     console.log("succesfully removed rental request")
+  //   })
+  // }
 
   displayResponsive: boolean;
   showResponsiveDialog() {

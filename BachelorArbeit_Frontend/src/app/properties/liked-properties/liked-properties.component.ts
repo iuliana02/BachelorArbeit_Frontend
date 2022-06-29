@@ -11,6 +11,7 @@ import {RentalRequest} from "../../model/rentalRequest";
 import { ChangeDetectorRef } from '@angular/core';
 import {Router} from "@angular/router";
 import {AppComponent} from "../../app.component";
+import {BackendWsService} from "../../backend/backend-ws.service";
 
 @Component({
   selector: 'app-liked-properties',
@@ -38,7 +39,8 @@ export class LikedPropertiesComponent implements OnInit {
 
   constructor(@Optional() public propertyService: PropertyService, @Optional() private modalService: NgbModal,
               @Optional() private messageService: MessageService, @Optional() private sanitizer: DomSanitizer,
-              @Optional() private userService: UserService, @Optional() private router: Router) {
+              @Optional() private userService: UserService, @Optional() private router: Router,
+              @Optional() private backendWsService: BackendWsService) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
@@ -225,13 +227,24 @@ export class LikedPropertiesComponent implements OnInit {
     rentalRequest.question1 = this.rentalRequest.controls['question1'].value;
     rentalRequest.question2 = this.rentalRequest.controls['question2'].value;
     rentalRequest.question3 = this.rentalRequest.controls['question3'].value;
-    this.propertyService.sendRentalRequest(rentalRequest, Number(apartment.idUser), Number(localStorage.getItem("idUser")), apartment.idProperty).subscribe(response => {
-        if (response.success) {
-          this.messageService.add({severity: 'success', summary: 'Succesfully sent rental request', detail: "null"})
-          this.modalService.dismissAll();
-        }
-      }
-    );
+    if (rentalRequest.question1==null || rentalRequest.question2==null || rentalRequest.question3==null){
+      this.messageService.add({severity: 'error', summary: 'Please answer all questions', detail: ""})
+      return
+    }
+    rentalRequest.idLandlord = Number(apartment.idUser);
+    rentalRequest.idTenant = Number(localStorage.getItem("idUser"));
+    rentalRequest.idProperty = apartment.idProperty;
+    this.backendWsService.saveRentalRequest(rentalRequest);
+    this.messageService.add({severity: 'success', summary: 'Succesfully sent rental request', detail: ""})
+    this.modalService.dismissAll();
+
+    // this.propertyService.sendRentalRequest(rentalRequest, Number(apartment.idUser), Number(localStorage.getItem("idUser")), apartment.idProperty).subscribe(response => {
+    //     if (response.success) {
+    //       this.messageService.add({severity: 'success', summary: 'Succesfully sent rental request', detail: "null"})
+    //       this.modalService.dismissAll();
+    //     }
+    //   }
+    // );
     // this.sendMessage(rentalRequest)
   }
 

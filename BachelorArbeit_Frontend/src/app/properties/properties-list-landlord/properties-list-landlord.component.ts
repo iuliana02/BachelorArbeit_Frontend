@@ -20,7 +20,7 @@ export class PropertiesListLandlordComponent implements OnInit {
   constructor(public propertyService: PropertyService, private sanitizer: DomSanitizer) { }
 
   async ngOnInit(): Promise<void> {
-    await this.propertyService.getAllProperties().toPromise().then(response => {
+    await this.propertyService.getAllPropertiesForLandlord().toPromise().then(response => {
       if (response.success) {
         this.apartments = response.data;
         console.log(this.apartments)

@@ -3,8 +3,9 @@
 
 <!--<div class="centered" *ngIf="noRentalRequests"> <h3> Currently no new rental requests </h3></div>-->
 
+<div fxLayout="column" class="centered">
 <div class="card w-50 classCard" *ngFor="let request of this.rentalRequests">
-  <div class="card-body">
+  <div class="card-body" *ngIf="rentalRequests.length!=0">
     <h5> Request from {{request.nameRequester}} </h5>
     <h5> For apartment #{{request.idProperty}} </h5>
 
@@ -17,22 +18,15 @@
   </div>
   Tenant's answers:<br><br>
         <fieldset disabled>
-    <label for="question1">Where do you work currently?</label>
-    <input type="text" id="question1" class="form-control" placeholder={{request.question1}}>
-    <label for="question2">Where did you live before?</label>
-    <input type="text" id="question2" class="form-control" placeholder={{request.question2}}>
-    <label for="question3">For how much time do you plan to rent the apartment?</label>
-    <input type="text" id="question3" class="form-control" placeholder={{request.question3}}>
+    <label for="question1">Why are you moving?*</label>
+    <input type="text" id="question1" class="form-control" placeholder={{request.question1}} >
+    <label for="question2">Do you have pets?*</label>
+    <input type="text" id="question2" class="form-control" placeholder={{request.question2}} >
+    <label for="question3">For how much time do you plan to rent the apartment?*</label>
+    <input type="text" id="question3" class="form-control" placeholder={{request.question3}} >
   </fieldset>
 
-<!--&lt;!&ndash;        <div class="centered">&ndash;&gt;-->
-<!--        <button pButton pRipple label="Approve" icon="pi pi-check" class="p-button-success" style="max-width: 100px;" (click)="approveRequest(request.idLandlord, request.idTenant, request.idProperty)"></button>-->
-<!--        <button pButton pRipple type="button" label="Decline" class="p-button-raised p-button-danger" style="max-width: 100px"></button>-->
-<!--&lt;!&ndash;        </div>&ndash;&gt;-->
-<!--      </div>-->
-<!--    </div>-->
-
-    <p-button (click)="showResponsiveDialog()" icon="pi pi-check" label="Approve"></p-button>
+    <p-button (click)="showResponsiveDialog()" icon="pi pi-check" label="Approve" class="centered"></p-button>
     <p-dialog header="Schedule an appointment for clarifications / final details for closing contract" [(visible)]="displayResponsive" [breakpoints]="{'960px': '75vw'}" [style]="{width: '50vw'}"
               [draggable]="false" [resizable]="false">
       <form [formGroup]="scheduleAppointment">
@@ -49,5 +43,11 @@
 <!--        <button pButton pRipple type="button" label="Decline" class="p-button-raised p-button-danger" style="max-width: 100px"></button>-->
 
 
+  </div>
+</div>
+  </div>
+</div>
+  <div *ngIf="rentalRequests.length==0">
+    <h2> Currently no non-evaluated rental requests.</h2>
   </div>
 </div>

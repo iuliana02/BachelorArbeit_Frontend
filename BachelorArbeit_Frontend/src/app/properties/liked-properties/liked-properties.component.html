@@ -1,8 +1,9 @@
 <!--<app-home></app-home>-->
 <p-toast position="bottom-center"></p-toast>
 
+<div fxLayout="column" class="centered">
 <div *ngIf="!noLikedApartments">
-<div id="divToReload" class="card w-75 classCard" *ngFor="let apartment of this.apartments">
+<div class="classCard card w-75" *ngFor="let apartment of this.apartments">
   <div class="card-body">
     <h5 class="card-title text-900">Apartment with {{apartment.nrOfRooms +' rooms, ' + apartment.divisionType + ', ' + apartment.area + ' mp2'}}</h5>
 
@@ -54,22 +55,14 @@
     <div *ngFor="let img of apartment.imagesToShow" class="flex-container" style="padding-left: 40px">
       <p-image  [src]= 'img' width="200px" [preview]="true"></p-image>
     </div>
-    <!--    <p-galleria [value]="this.imagesToShow" [responsiveOptions]="responsiveOptions" [containerStyle]="{'max-width': '640px'}" [numVisible]="5">-->
-    <!--      <ng-template pTemplate="item" let-item>-->
-    <!--        <img [src]="item" style="width: 100%;" />-->
-    <!--      </ng-template>-->
-    <!--      <ng-template pTemplate="thumbnail" let-item>-->
-    <!--        <div class="grid grid-nogutter justify-content-center">-->
-    <!--          <img [src]="item" />-->
-    <!--        </div>-->
-    <!--      </ng-template>-->
-    <!--    </p-galleria>-->
 
-
-    <div class="row" style="padding-top: 20px">
-      <div class="col-lg-5">
+    <div class="container">
+      <div class="container2" style="padding-top: 20px">
+        <div class="col-sm price" style="text-align: center">
+          Price: {{apartment.price}} €
+        </div>
       </div>
-      <div class="col-sm">
+      <div class="container2" style="padding-top: 20px">
         <p-button label="Request" icon="pi pi-check" (click)="openVerticallyCentered(content)"></p-button>
       </div>
     </div>
@@ -86,26 +79,27 @@
       <div class="modal-body">
         <form [formGroup]="rentalRequest">
           <div class="form-group">
-            <label for="question1">Where do you work currently?</label>
+            <label for="question1">Why are you moving?*</label>
             <div class="input-group">
-              <input id="question1" class="form-control" formControlName="question1">
+              <input id="question1" class="form-control" formControlName="question1" required>
             </div>
           </div>
           <div class="form-group">
-            <label for="question2">Where did you live before?</label>
+            <label for="question2">Do you have pets?*</label>
             <div class="input-group">
-              <input id="question2" class="form-control" formControlName="question2">
+              <input id="question2" class="form-control" formControlName="question2" required>
             </div>
           </div>
           <div class="form-group">
-            <label for="question3">For how much time do you plan to rent the apartment?</label>
+            <label for="question3">For how much time do you plan to rent the apartment?*</label>
             <div class="input-group">
-              <input id="question3" class="form-control" formControlName="question3">
+              <input id="question3" class="form-control" formControlName="question3" required>
             </div>
           </div>
         </form>
       </div>
       <div class="modal-footer">
+        <p> We will evaluate your answers and try to schedule an appointment for clarifications/ more details as soon as possible! </p>
         <button type="button" class="btn btn-outline-dark" (click)="sendRentalRequest(apartment)">Send</button>
       </div>
     </ng-template>
@@ -114,7 +108,10 @@
 </div>
 </div>
 
-<div *ngIf="noLikedApartments">
-  Favourites list is currently empty!
+  <div *ngIf="noLikedApartments">
+    <h2>Currently no liked apartments</h2>
+  </div>
 </div>
+
+
 

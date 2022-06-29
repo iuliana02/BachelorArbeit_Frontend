@@ -1,20 +1,21 @@
+<p-toast position="bottom-right"></p-toast>
 
-<div id="registerContainer" *ngIf="registerForm" >
+<div id="registerContainer" *ngIf="registerForm" fxLayout="column" class="centered">
   <div class="wrapper fadeInDown">
     <h2>Register as </h2>
-    <button pButton type="button" class="p-button-primary" (click)="clickLandlord()" [ngClass]="{'brown':toggle1}"> {{'Landlord'}}</button>
-    <button pButton type="button" class="p-button-primary" (click)="clickTenant()" [ngClass]="{'brown':toggle2}"> {{'Tenant'}}</button>
+    <button pButton type="button" class="p-button-primary" style="box-shadow:none;" (click)="clickLandlord()" [ngClass]="{brown:toggle1}"> {{'Landlord'}}</button>
+    <button pButton type="button" class="p-button-primary" style="box-shadow:none;" (click)="clickTenant()" [ngClass]="{brown:toggle2}"> {{'Tenant'}}</button>
     <br>
     <div [formGroup]="registerForm" id="formContentRegister">
       <!-- Register Form -->
-      <input pInputText type="text" id="firstName" formControlName="firstName" name="register"
-             placeholder="{{'First name' }}">
-      <input pInputText type="text" id="lastName" formControlName="lastName" name="register"
-             placeholder="{{'Last name' }}">
-      <input pInputText type="email" id="email" formControlName="email" name="register"
-             placeholder="{{'Email'}}">
-      <input pInputText type="password" id="password" formControlName="password" name="register"
-             placeholder="{{'Password'}}">
+      <input pInputText type="text" id="firstName" formControlName="firstName" name="register" required
+             placeholder="{{'First name *' }}">
+      <input pInputText type="text" id="lastName" formControlName="lastName" name="register" required
+             placeholder="{{'Last name *' }}">
+      <input pInputText type="email" id="email" formControlName="email" name="register" required
+             placeholder="{{'Email *'}}">
+      <input pInputText type="password" id="password" formControlName="password" name="register" required
+             placeholder="{{'Password *'}}">
       <br><br>
       <button pButton type="button" (click)="register()" class="p-button-primary"> {{'Register'}}</button>
     </div>

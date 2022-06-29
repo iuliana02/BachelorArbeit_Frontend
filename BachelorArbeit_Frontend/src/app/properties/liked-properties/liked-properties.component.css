@@ -7,3 +7,23 @@
   display: inline-block;
 }
 
+.price {
+  /*flex-direction: column;*/
+  background: #ffcccc;
+  padding: 10px 10px;
+  min-width: 60px;
+  max-width: 150px;
+}
+
+.container2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center
+}

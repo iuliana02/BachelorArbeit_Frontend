@@ -1,5 +1,6 @@
-<div class="card w-75 classCard" style="left: 200px;">
-  <p-accordion [multiple]="true">
+<div class="centered" fxLayout="column">
+<div class="card w-75" *ngIf="tenantsApartmentsList.length!=0">
+  <p-accordion [multiple]="true" style="width: 100%">
 
     <p-accordionTab *ngFor="let tenantApartment of this.tenantsApartmentsList">
       <p-header>
@@ -7,9 +8,9 @@
         <p> Your agent: {{tenantApartment[0]["landlordOfRequest"].firstName}} {{tenantApartment[0]["landlordOfRequest"].lastName}}</p>
       </p-header>
       <div class="card-body ">
-        <p-tag styleClass="p-mr-2"  class="position-relative top-1 start-50 badge"
-               severity="warning"> #{{tenantApartment[1]["correspondingApartment"].idProperty}}
-        </p-tag>
+<!--        <p-tag styleClass="p-mr-2"  class="position-relative top-1 start-50 badge"-->
+<!--               severity="warning"> #{{tenantApartment[1]["correspondingApartment"].idProperty}}-->
+<!--        </p-tag>-->
         <h5 class="card-title text-900">Apartment with {{tenantApartment[1]["correspondingApartment"].nrOfRooms +' rooms, ' + tenantApartment[1]["correspondingApartment"].divisionType + ', ' + tenantApartment[1]["correspondingApartment"].area + ' mp2'}}</h5>
         <ul>
           <li class="flex py-2" >
@@ -38,4 +39,9 @@
     </p-accordionTab>
 
   </p-accordion>
+</div>
+
+  <div *ngIf="tenantsApartmentsList.length==0">
+    <h2>Currently no new appointments</h2>
+  </div>
 </div>

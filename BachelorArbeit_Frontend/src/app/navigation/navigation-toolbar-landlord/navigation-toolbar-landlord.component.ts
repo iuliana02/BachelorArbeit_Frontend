@@ -23,6 +23,7 @@ export class NavigationToolbarLandlordComponent implements OnInit {
 
   constructor(public router : Router, private userService: UserService,
               private rentalRequestService: RentalRequestService, private backendWsService: BackendWsService) { }
+
   async ngOnInit() {
     await this.userService.getAllUsers().toPromise().then((data) =>{
       if (data.success){

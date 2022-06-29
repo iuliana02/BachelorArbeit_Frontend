@@ -1,8 +1,8 @@
-#loginContainer {
-  display: grid;
-  grid-template-rows: 800px 500px;
-  place-items: center;
-}
+/*#loginContainer {*/
+/*  display: grid;*/
+/*  grid-template-rows: 800px 500px;*/
+/*  place-items: center;*/
+/*}*/
 
 #formContentRegister, #formContentLogin {
   -webkit-border-radius: 10px 10px 10px 10px;
@@ -17,12 +17,8 @@
   text-align: center;
 }
 
-.brown {
-  background-color: darkmagenta;
-  border: darkmagenta;
-}
-
-.hover {
-  background-color: darkmagenta;
-  border: darkmagenta;
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

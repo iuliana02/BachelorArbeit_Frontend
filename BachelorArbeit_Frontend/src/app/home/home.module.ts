@@ -11,20 +11,22 @@ import {
 import {MatIconModule} from "@angular/material/icon";
 import {TagModule} from "primeng/tag";
 import {ImageModule} from "primeng/image";
+import {FlexModule} from "@angular/flex-layout";
 
 @NgModule({
   declarations: [HomeComponent],
   exports: [
     HomeComponent
   ],
-  imports: [
-    CommonModule,
-    MegaMenuModule,
-    MatProgressSpinnerModule,
-    AppModule,
-    MatIconModule,
-    TagModule,
-    ImageModule
-  ]
+    imports: [
+        CommonModule,
+        MegaMenuModule,
+        MatProgressSpinnerModule,
+        AppModule,
+        MatIconModule,
+        TagModule,
+        ImageModule,
+        FlexModule
+    ]
 })
 export class HomeModule { }

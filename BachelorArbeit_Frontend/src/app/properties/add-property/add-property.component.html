@@ -1,160 +1,174 @@
 <p-toast position="top-right"></p-toast>
 
-<div id="property-form" class="container">
-  <p-panel class="property-form">
-    <ng-template pTemplate="header">
-      <h4>Register a new property</h4>
-    </ng-template>
-    <ng-template pTemplate="content">
-      <div class="centerDiv">
-        <form [formGroup]="newPropertyForm" id="propertyForm" class="ui-fluid p-formgrid p-grid" *ngIf="this.newPropertyForm">
-          <!--      <h4> Address information</h4>-->
-          <div class="row">
-            <div class="col">
-              <div class="p-field p-col-12 p-md-2">
-        <span class="ui-float-label">
-          <label for="float-input" >Land</label> <br>
-          <input pInputText type="text" id="float-input" formControlName="land" name="property" size = "30" [class]= "this.emptyLand ? 'ng-invalid ng-dirty' : null">
-        </span>
+<div fxLayout="column" class="centered">
+  <div id="property-form" class="container">
+    <p-panel class="property-form">
+      <ng-template pTemplate="header">
+        <h4>Register a new property</h4>
+      </ng-template>
+      <ng-template pTemplate="content">
+          <form [formGroup]="newPropertyForm" id="propertyForm" *ngIf="this.newPropertyForm">
+            <div class="ui-fluid p-grid forms-grid">
+              <div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center" fxLayoutGap="20">
+                <div class="p-field p-col-12 p-md-6">
+                  <label for="float-input">Country*</label> <br>
+                  <input pInputText type="text" id="float-input" formControlName="land" name="property" size="30px" required
+                         [class]="this.emptyLand ? 'ng-invalid ng-dirty' : null">
+                </div>
+<!--              </div>-->
+<!--              <div class="col">-->
+                <div class="p-field p-col-12 p-md-6">
+                  <label for="city">City*</label><br>
+                  <input pInputText type="text" id="city" formControlName="city" name="property" size="30px" required
+                         [class]="this.emptyCity ? 'ng-invalid ng-dirty' : null">
+                </div>
               </div>
-            </div>
-            <div class="col">
-              <div class="p-field p-col-12 p-md-2">
-                <label for="city">City</label><br>
-                <input pInputText type="text" id="city" formControlName="city" name="property" size = "30" [class]= "this.emptyCity ? 'ng-invalid ng-dirty' : null">
+<!--            </div>-->
+
+<!--            <div class="row">-->
+              <div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center" fxLayoutGap="20">
+                <div class="p-field p-col-12 p-md-6">
+                  <label for="street">Street*</label> <br>
+                  <input pInputText type="email" id="street" formControlName="street" name="property" size="30px" required
+                         [class]="this.emptyStreet ? 'ng-invalid ng-dirty' : null">
+                </div>
+<!--              </div>-->
+<!--              <div class="col">-->
+                <div class="p-field p-col-12 p-md-6">
+                  <label for="nr">Number*</label><br>
+                  <input pInputText type="number" id="nr" formControlName="nr" name="property" style="width:275px" required
+                         [class]="this.emptyNumber ? 'ng-invalid ng-dirty' : null">
+                </div>
               </div>
+<!--            </div>-->
+
+            <div fxLayout="column" fxLayoutAlign="center" >
+              <div class="p-field p-col-12 p-md-6">
+                <br>
+              <label for="description" class="centered">Description*</label>
+              <textarea pInputText id="description" formControlName="description" name="property" rows="3" cols="60" class="textarea" required
+                        style="resize: none" [class]="this.emptydescription ? 'ng-invalid ng-dirty' : null"></textarea>
             </div>
+            </div>
+
+<!--            <div class="row">-->
+              <div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center" fxLayoutGap="20">
+                <div class="p-field p-col-12 p-md-2">
+                  <label for="divisionType">Division type*</label><br>
+                  <input pInputText type="text" id="divisionType" formControlName="divisionType" name="property" required size="30px"
+                         [class]="this.emptydivType ? 'ng-invalid ng-dirty' : null">
+                </div>
+<!--              </div>-->
+<!--              <div class="col">-->
+                <div class="p-field p-col-12 p-md-2">
+                  <label for="area">Area*</label><br>
+                  <input pInputText type="number" id="area" formControlName="area" name="property" required style="width:275px"
+                         [class]="this.emptyArea ? 'ng-invalid ng-dirty' : null">
+                </div>
+              </div>
+<!--            </div>-->
+
+<!--            <div class="row">-->
+              <div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center" fxLayoutGap="20">
+                <div class="p-field p-col-12 p-md-2">
+                  <label for="nrOfRooms">Number of rooms*</label><br>
+                  <input pInputText type="number" id="nrOfRooms" formControlName="nrOfRooms" name="property" style="width:275px" required
+                         [class]="this.emptyNrRooms ? 'ng-invalid ng-dirty' : null">
+                </div>
+<!--              </div>-->
+<!--              <div class="col">-->
+                <div class="p-field p-col-12 p-md-2">
+                  <label for="nrOfBathrooms">Number of bathrooms*</label><br>
+                  <input pInputText type="number" id="nrOfBathrooms" formControlName="nrOfBathrooms" name="property" style="width:275px" required
+                         [class]="this.emptyNrBathrooms ? 'ng-invalid ng-dirty' : null">
+                </div>
+              </div>
+<!--            </div>-->
+
+<!--            <div class="row">-->
+              <div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center" fxLayoutGap="20">
+                <div class="p-field p-col-12 p-md-2">
+                  <label for="floor">Floor*</label><br>
+                  <input pInputText type="number" id="floor" formControlName="floor" name="property" style="width:275px" required
+                         [class]="this.emptyFloor ? 'ng-invalid ng-dirty' : null">
+                </div>
+<!--              </div>-->
+<!--              <div class="col">-->
+                <div class="p-field p-col-12 p-md-2">
+                  <label for="availableFrom">Available from*</label><br>
+                  <p-inputMask id="availableFrom" mask="9999-99-99" formControlName="availableFrom" [size]="30"
+                               [class]="this.emptyAvailableFrom ? 'ng-invalid ng-dirty' : null">
+                  </p-inputMask>
+                </div>
+              </div>
+<!--            </div>-->
+
+<!--            <div class="row">-->
+              <div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center" fxLayoutGap="20">
+                <div class="p-field p-col-12 p-md-2">
+                  <label for="style">Number of balconies*</label><br>
+                  <input pInputText type="number" id="nrOfBalconies" formControlName="nrOfBalconies" name="property" style="width:275px" required
+                         [class]="this.emptyNrOfBalconies ? 'ng-invalid ng-dirty' : null">
+                </div>
+<!--              </div>-->
+<!--              <div class="col">-->
+                <div class="p-field p-col-12 p-md-2">
+                  <label for="parkingLotsAvailable">Parking lots available*</label><br>
+                  <input pInputText type="number" id="parkingLotsAvailable" formControlName="parkingLotsAvailable" style="width:275px" required
+                         name="property" [class]="this.emptyParking ? 'ng-invalid ng-dirty' : null">
+                </div>
+              </div>
+<!--            </div>-->
+
+<!--            <div class="row">-->
+              <div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center" fxLayoutGap="20">
+                <div class="p-field p-col-12 p-md-2">
+                  <label for="style">Style*</label><br>
+                  <input pInputText type="text" id="style" formControlName="style" name="property" size="30px" required
+                         [class]="this.emptyStyle ? 'ng-invalid ng-dirty' : null">
+                </div>
+              </div>
+<!--            </div>-->
+
+            <p-fileUpload [customUpload]="true" (uploadHandler)="onUpload($event)" id="profileImage"
+                          formControlName="propertyImage" class="form-control" type="file" [multiple]="true">
+              <ng-template pTemplate="content">
+                <ul>
+                  <li *ngFor="let file of this.uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                </ul>
+              </ng-template>
+            </p-fileUpload>
+
+            </div>
+          </form>
+      </ng-template>
+      <br><br>
+
+      <ng-template pTemplate="footer">
+        <div fxLayout="column" class="centered">
+        <button pButton type="button" class="p-button-help p-button-rounded" (click)="predictPrice()"> {{'Estimate price'}}</button>
+          <br>
+        <div *ngIf="!anyFieldEmpty">
+          <div *ngIf="!spinning" class="container mb-3 font-bold text-2xl">
+            <span class="text-900">The recommended rent price is:       </span>&nbsp;&nbsp;
+            <p-chip class="text-2xl">{{predictedPrice}}</p-chip>
           </div>
+          <form [formGroup]="newPropertyForm">
+            <div class="text-500 container mb-3 text-lg">
+              Keep the predicted price or choose your price: &nbsp; &nbsp;
+              <input pInputText type="text" id="price" formControlName="price" name="property" *ngIf="!spinning" size="4"
+                     placeholder="{{predictedPrice}}">
+            </div>
+          </form>
 
-          <div class="row">
-            <div class="col">
-              <div class="p-field p-col-12 p-md-2">
-                <label for="street">Street</label> <br>
-                <input pInputText type="email" id="street" formControlName="street" name="property" size = "30" [class]= "this.emptyStreet ? 'ng-invalid ng-dirty' : null">
-              </div>
-            </div>
-            <div class="col">
-              <div class="p-field p-col-12 p-md-2">
-                <label for="nr">Number</label><br>
-                <input pInputText type="number" id="nr" formControlName="nr" name="property" size = "30" [class]= "this.emptyNumber ? 'ng-invalid ng-dirty' : null">
-              </div>
-            </div>
+          <div *ngIf="spinning" id="spinnerPredictedPrice">
+            <mat-spinner [diameter]="50"></mat-spinner>
           </div>
-
-          <div class="p-field p-col-12 p-md-2">
-            <label for="description">Description</label><br>
-            <textarea pInputText id="description" formControlName="description" name="property" rows="3" style="resize: none;" cols="75" [class]= "this.emptydescription ? 'ng-invalid ng-dirty' : null"></textarea>
-          </div>
-
-          <div class="row">
-            <div class="col">
-              <div class="p-field p-col-12 p-md-2">
-                <label for="divisionType">Division type</label><br>
-                <input pInputText type="text" id="divisionType" formControlName="divisionType" name="property" size = "30" [class]= "this.emptydivType ? 'ng-invalid ng-dirty' : null">
-              </div>
-            </div>
-            <div class="col">
-              <div class="p-field p-col-12 p-md-2">
-                <label for="area">Area</label><br>
-                <input pInputText type="text" id="area" formControlName="area" name="property" size = "30" [class]= "this.emptyArea ? 'ng-invalid ng-dirty' : null">
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col">
-              <div class="p-field p-col-12 p-md-2">
-                <label for="nrOfRooms">Number of rooms</label><br>
-                <input pInputText type="number" id="nrOfRooms" formControlName="nrOfRooms" name="property" size = "40" [class]= "this.emptyNrRooms ? 'ng-invalid ng-dirty' : null">
-              </div>
-            </div>
-            <div class="col">
-              <div class="p-field p-col-12 p-md-2">
-                <label for="nrOfBathrooms">Number of bathrooms</label><br>
-                <input pInputText type="number" id="nrOfBathrooms" formControlName="nrOfBathrooms" name="property" size = "40" [class]= "this.emptyNrBathrooms ? 'ng-invalid ng-dirty' : null">
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col">
-              <div class="p-field p-col-12 p-md-2">
-                <label for="floor">Floor</label><br>
-                <input pInputText type="number" id="floor" formControlName="floor" name="property" size = "40" [class]= "this.emptyFloor ? 'ng-invalid ng-dirty' : null">
-              </div>
-            </div>
-            <div class="col">
-              <div class="p-field p-col-12 p-md-2">
-                <label for="availableFrom">Available from</label><br>
-                <p-inputMask id="availableFrom" mask="9999-99-99" formControlName="availableFrom" [class]= "this.emptyAvailableFrom ? 'ng-invalid ng-dirty' : null">
-                </p-inputMask>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col">
-              <div class="p-field p-col-12 p-md-2">
-                <label for="style">Number of balconies</label><br>
-                <input pInputText type="number" id="nrOfBalconies" formControlName="nrOfBalconies" name="property" [class]= "this.emptyNrOfBalconies ? 'ng-invalid ng-dirty' : null">
-              </div>
-            </div>
-            <div class="col">
-              <div class="p-field p-col-12 p-md-2">
-                <label for="parkingLotsAvailable">Parking lots available</label><br>
-                <input pInputText type="number" id="parkingLotsAvailable" formControlName="parkingLotsAvailable" name="property" size = "40" [class]= "this.emptyParking ? 'ng-invalid ng-dirty' : null">
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col">
-              <div class="p-field p-col-12 p-md-2">
-                <label for="style">Style</label><br>
-                <input pInputText type="text" id="style" formControlName="style" name="property" [class]= "this.emptyStyle ? 'ng-invalid ng-dirty' : null">
-              </div>
-            </div>
-          </div>
-
-          <p-fileUpload [customUpload]="true" (uploadHandler)="onUpload($event)" id="profileImage"
-                        formControlName="propertyImage" class="form-control" type="file" [multiple]="true">
-            <ng-template pTemplate="content">
-              <ul>
-                <li *ngFor="let file of this.uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
-              </ul>
-            </ng-template>
-          </p-fileUpload>
-
-
-        </form>
-      </div>
-    </ng-template>
-    <br><br>
-
-    <ng-template pTemplate="footer">
-      <button pButton type="button" class="p-button-primary" (click)="saveProperty()"> {{'Add'}}</button>
-      <button pButton id="buttonEstimate" type="button" class="p-button-help p-button-rounded" (click)="predictPrice()"> {{'Estimate price'}}</button>
-      <div *ngIf="!anyFieldEmpty">
-        <div *ngIf="!spinning" class="container mb-3 font-bold text-2xl">
-          <span class="text-900">The recommended rent price is: </span> <br>
-          <br> <p-chip class="text-2xl">{{predictedPrice}}</p-chip>
         </div>
-        <form [formGroup]="newPropertyForm">
-          <div class="text-500 container mb-3 text-lg">
-            Keep the predicted price or choose your price:
-            <input pInputText type="text" id="price" formControlName="price" name="property" placeholder="{{predictedPrice}}">
-          </div>
-        </form>
-
-        <div *ngIf="spinning" id="spinnerPredictedPrice">
-          <mat-spinner [diameter]="50"></mat-spinner>
+          <button pButton type="button" class="p-button-primary" (click)="saveProperty()"> {{'Add'}}</button> <br>
         </div>
-      </div>
+      </ng-template>
 
-
-    </ng-template>
-
-  </p-panel>
+    </p-panel>
+  </div>
 </div>
-
-

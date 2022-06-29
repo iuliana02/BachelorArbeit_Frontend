@@ -1,6 +1,6 @@
-<p-toast position="top-right"></p-toast>
+<p-toast position="bottom-right"></p-toast>
 
-<div id="loginContainer" *ngIf="loginForm">
+<div id="loginContainer" *ngIf="loginForm" fxLayout="column" class="centered">
   <div class="wrapper fadeInDown">
     <h2>Already registered?... </h2>
     <button pButton type="button" (click)="showLogin()" class="p-button-primary"> {{'Login'}}</button>

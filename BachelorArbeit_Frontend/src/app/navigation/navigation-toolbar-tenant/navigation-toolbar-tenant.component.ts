@@ -37,7 +37,7 @@ export class NavigationToolbarTenantComponent implements OnInit {
       var s: string = "";
       let notif: any;
       if (n.type == "WELCOME_NEW_USER") {
-        s = "Welcome to Estatesy, " + n.message.data.firstName + " " + n.message.data.lastName + "!"
+        s = "Welcome to eState, " + n.message.data.firstName + " " + n.message.data.lastName + "!"
         notif = {type: n.type, object: n.message, date: formatDate(n.date, 'dd-MM-yyyy', 'en-US'), message: s}
       }
       else if (n.type == "ACCEPTED_REQUEST"){

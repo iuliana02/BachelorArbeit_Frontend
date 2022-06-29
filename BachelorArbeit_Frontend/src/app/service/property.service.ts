@@ -29,6 +29,18 @@ export class PropertyService {
     return this.backendService.get(`${this.baseURL}/getAll`, options);
   }
 
+  public getAllPropertiesForLandlord(): Observable<any> {
+    const options = {
+      headers: {
+        'Authorization': localStorage.getItem('token'),
+        'Access-Control-Allow-Origin': 'http://localhost:4201',
+        'Access-Control-Allow-Credentials': 'true',
+        'Content-Type': 'application/json'
+      }
+    };
+    return this.backendService.get(`${this.baseURL}/getAllForLandlord`, options);
+  }
+
   public addProperty(property: Property, idUser: number){
     let params = new HttpParams();
     params = params.append('userId', idUser);
@@ -118,7 +130,7 @@ export class PropertyService {
     return this.backendService.post(`http://localhost:4201/external/predict`, body);
   }
 
-  getPropertyWithMostLikes(){
+  getPropertyWithMostLikes(): Observable<any>{
     return this.backendService.get(`${this.baseURL}/getPropertyWithMostLikes`)
   }
 

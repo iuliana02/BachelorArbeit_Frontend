@@ -10,6 +10,7 @@ import {DividerModule} from "primeng/divider";
 import { NavigationToolbarTenantComponent } from './navigation-toolbar-tenant/navigation-toolbar-tenant.component';
 import {MatMenuModule} from "@angular/material/menu";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {FlexModule} from "@angular/flex-layout";
 
 @NgModule({
   declarations: [NavigationToolbarLandlordComponent, NavigationToolbarTenantComponent],
@@ -26,7 +27,8 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
         MegaMenuModule,
         DividerModule,
         MatMenuModule,
-        FontAwesomeModule
+        FontAwesomeModule,
+        FlexModule
     ]
 })
 export class NavigationModule { }

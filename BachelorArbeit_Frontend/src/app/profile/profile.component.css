@@ -42,16 +42,22 @@
   text-align: center;
 }
 
-#profile-info {
-  position: absolute;
-  width: 600px;
-  left: 300px;
-  margin: 0 auto;
-}
+/*#profile-info {*/
+/*  position: absolute;*/
+/*  width: 600px;*/
+/*  left: 300px;*/
+/*  margin: 0 auto;*/
+/*}*/
 
 .topnav-left {
   float: none;
   position: absolute;
   left: 3%;
   transform: translate(-10%, -0%);
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

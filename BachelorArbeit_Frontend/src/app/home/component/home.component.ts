@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   retrievedImage: any;
   base64Data: any;
   imageIdList : any[] = [];
+  noApartments: boolean = false;
 
   constructor(public router: Router, private propertyService: PropertyService, private sanitizer: DomSanitizer) { }
 
@@ -33,7 +34,7 @@ export class HomeComponent implements OnInit {
     this.verticalMenu = [
       {
         label: 'Dashboard',
-        url: 'home-landlord'
+        url: 'home-landlord',
       },
       {
         label: 'Profile',
@@ -42,9 +43,6 @@ export class HomeComponent implements OnInit {
       {
         label: 'My properties',
         url: 'properties-list-landlord'
-        // items:[]
-        // {label: 'Rented apartments', url: 'properties-list'} as MenuItem,
-        // {label: "Not rented apartments", url: 'properties-list'}] as MenuItem
       },
       {
         label: 'Tenant requests',
@@ -58,12 +56,17 @@ export class HomeComponent implements OnInit {
     const datepipe: DatePipe = new DatePipe('en-US')
     this.formatCurrentDate = datepipe.transform(this.currentDate, 'dd-MMM-YYYY')
 
-    this.propertyService.getPropertyWithMostLikes().subscribe(res => {
+    await this.propertyService.getPropertyWithMostLikes().toPromise().then(res => {
       this.mostLikedApartment = res.data;
     })
+    if (this.mostLikedApartment == null){
+      this.noApartments = true;
+    }
+
 
     this.mostLikedApartment.imagesToShow = await this.getImages(this.mostLikedApartment.idProperty)
-  }
+
+      }
 
   logout() {
     // @ts-ignore

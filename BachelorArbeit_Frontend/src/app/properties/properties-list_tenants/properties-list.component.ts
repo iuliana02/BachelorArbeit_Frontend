@@ -199,16 +199,20 @@ export class PropertiesListComponent implements OnInit {
 
   public sendRentalRequest(apartment: Property) {
     let rentalRequest = {} as RentalRequest;
-      rentalRequest.question1 = this.rentalRequest.controls['question1'].value;
-      rentalRequest.question2 = this.rentalRequest.controls['question2'].value;
-      rentalRequest.question3 = this.rentalRequest.controls['question3'].value;
-      rentalRequest.idLandlord = Number(apartment.idUser);
-      rentalRequest.idTenant = Number(localStorage.getItem("idUser"));
-      rentalRequest.idProperty = apartment.idProperty;
-      this.backendWsService.saveRentalRequest(rentalRequest);
-      this.messageService.add({severity: 'success', summary: 'Succesfully sent rental request', detail: "null"})
-      this.modalService.dismissAll();
-      this.router.navigate(['properties-list'])
+    rentalRequest.question1 = this.rentalRequest.controls['question1'].value;
+    rentalRequest.question2 = this.rentalRequest.controls['question2'].value;
+    rentalRequest.question3 = this.rentalRequest.controls['question3'].value;
+    if (rentalRequest.question1==null || rentalRequest.question2==null || rentalRequest.question3==null){
+      this.messageService.add({severity: 'error', summary: 'Please answer all questions', detail: ""})
+      return
+    }
+    rentalRequest.idLandlord = Number(apartment.idUser);
+    rentalRequest.idTenant = Number(localStorage.getItem("idUser"));
+    rentalRequest.idProperty = apartment.idProperty;
+    this.backendWsService.saveRentalRequest(rentalRequest);
+    this.messageService.add({severity: 'success', summary: 'Succesfully sent rental request', detail: ""})
+    this.modalService.dismissAll();
+    this.router.navigate(['properties-list'])
     }
 
   }

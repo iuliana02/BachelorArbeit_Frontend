@@ -1,12 +1,14 @@
 <!--<app-home></app-home>-->
-
-<div class="card w-75 classCard" style="left: 200px;">
+<div class="centered" fxLayout="column">
+<div class="card w-75" *ngIf="tenantsApartmentsList.length!=0">
 <p-accordion [multiple]="true">
   <p-accordionTab *ngFor="let tenantApartment of this.tenantsApartmentsList">
     <p-header>
       <p>Tenant {{tenantApartment[0]["evaluatedUser"].firstName}} {{tenantApartment[0]["evaluatedUser"].lastName}}</p>
       <p> Contact : {{tenantApartment[0]["evaluatedUser"].mobileNumber}}</p>
-      <p style="margin-left:600px"> Appointment date: {{tenantApartment[2]["appointmentDate"]}}</p>
+<!--      <div fxLayout="column" >-->
+      <p> Appointment date: {{tenantApartment[2]["appointmentDate"]}}</p>
+<!--      </div>-->
     </p-header>
     <div class="card-body ">
       <p-tag styleClass="p-mr-2"  class="position-relative top-1 start-50 badge" style="margin-left: 480px"
@@ -42,3 +44,8 @@
 
 </p-accordion>
 </div>
+
+  <div *ngIf="tenantsApartmentsList.length==0">
+    <h2> Currently no tenant appointments</h2>
+  </div>
+  </div>
