@@ -210,7 +210,7 @@ export class PropertiesListComponent implements OnInit {
     rentalRequest.idTenant = Number(localStorage.getItem("idUser"));
     rentalRequest.idProperty = apartment.idProperty;
     this.backendWsService.saveRentalRequest(rentalRequest);
-    this.messageService.add({severity: 'success', summary: 'Succesfully sent rental request', detail: ""})
+    this.messageService.add({severity: 'success', summary: 'Successfully sent rental request', detail: ""})
     this.modalService.dismissAll();
     this.router.navigate(['properties-list'])
     }

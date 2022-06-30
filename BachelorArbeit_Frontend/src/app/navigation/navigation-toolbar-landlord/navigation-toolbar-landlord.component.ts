@@ -8,6 +8,7 @@ import {BackendWsService} from "../../backend/backend-ws.service";
 import {map} from "rxjs/operators";
 import {Subject, takeUntil} from "rxjs";
 import {RentalRequest} from "../../model/rentalRequest";
+import {SharedService} from "../../SharedService";
 
 @Component({
   selector: 'app-navigation-toolbar-landlord',
@@ -21,7 +22,7 @@ export class NavigationToolbarLandlordComponent implements OnInit {
   users!: User[];
   private unsubscribeSubject: Subject<void> = new Subject<void>();
 
-  constructor(public router : Router, private userService: UserService,
+  constructor(public router : Router, private userService: UserService, public sharedService: SharedService,
               private rentalRequestService: RentalRequestService, private backendWsService: BackendWsService) { }
 
   async ngOnInit() {

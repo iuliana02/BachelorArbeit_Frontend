@@ -33,6 +33,7 @@ export class RentalRequestComponent implements OnInit {
               private backendWsService: BackendWsService) { }
 
   async ngOnInit(): Promise<void> {
+    this.sharedService.rentalRequestsPage = true;
 
     this.backendWsService
       .getNonevaluatedRequests(Number(localStorage.getItem('idUser')))
@@ -84,6 +85,7 @@ export class RentalRequestComponent implements OnInit {
     this.messageService.add({severity: 'info', summary: 'Rental request successfully evaluated!', detail: ''});
     await this.rentalRequestService.getNonevaluatedRentalRequestsForLandlord(landlordId).toPromise().then((response) => {
       this.rentalRequests = response.data;
+      console.log("rentalRequests")
       console.log(this.rentalRequests)
     })
     await this.router.navigate(['rental-request'])
@@ -112,5 +114,6 @@ export class RentalRequestComponent implements OnInit {
   ngOnDestroy(): void {
     this.unsubscribeSubject.next();
     this.unsubscribeSubject.complete();
+    this.sharedService.rentalRequestsPage = false;
   }
 }

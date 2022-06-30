@@ -108,8 +108,8 @@ export class UserService {
   getEvaluatedRequestsForTenant(tenantId: number) {
     let params = new HttpParams();
     params = params.append('tenantId', tenantId);
-    return this.backendService.get(`${this.baseURL}/getEvaluatedRequestsForTenant`, params)
-
+    return this.backendService.get(`${this.baseURL}/getEvaluatedRequestsForTenantPost`, params)
   }
+
 
 }
